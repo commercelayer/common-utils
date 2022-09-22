@@ -1,0 +1,30 @@
+{
+  "name": "common-utils",
+  "private": true,
+  "description": "A set of common utilities internally used in Commerce Layer.",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "pnpm --filter '*' build",
+    "test": "pnpm --filter '*' test"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Marco Montalbano",
+    "email": "marco.montalbano@commercelayer.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercelayer/monorepo-starter.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=7"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^5.5.2"
+  }
+}

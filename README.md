@@ -1,2 +1,3 @@
 # common-utils
-A set of common utilities used internally in Commerce Layer.
+
+> A set of common utilities internally used in Commerce Layer.
