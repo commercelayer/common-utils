@@ -1,0 +1,24 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "standard",
+    "prettier" // disable other formatting rules
+  ],
+  "plugins": [
+    "prettier" // allow to use prettier/prettier as eslint rules
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": false,
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "trailingComma": "none"
+      }
+    ]
+  }
+}
