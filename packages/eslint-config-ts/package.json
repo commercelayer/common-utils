@@ -1,0 +1,49 @@
+{
+  "name": "@commercelayer/eslint-config-ts",
+  "version": "0.0.0",
+  "description": "ESLint config for Typescript projects to use JS Standard rules and Prettier as formatter",
+  "main": "index.js",
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "JavaScript Standard Style",
+    "standard",
+    "ts-standard",
+    "prettier"
+  ],
+  "author": {
+    "name": "Giuseppe Ciotola",
+    "email": "giuseppe@commercelayer.io"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercelayer/common-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/commercelayer/common-utils/issues"
+  },
+  "scripts": {
+    "lint": "pnpm eslint index.js",
+    "lint:fix": "pnpm eslint index.js --fix"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.1",
+    "prettier": "^2.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.24.0",
+    "typescript": "^4.8.3"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.0",
+    "typescript": ">=4.0"
+  }
+}
