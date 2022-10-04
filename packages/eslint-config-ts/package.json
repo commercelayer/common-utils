@@ -1,5 +1,5 @@
 {
-  "name": "@commercelayer/eslint-config-commercelayer-ts",
+  "name": "@commercelayer/eslint-config-ts",
   "version": "0.0.1",
   "description": "ESLint config for Typescript projects to use JS Standard rules and Prettier as formatter",
   "main": "index.js",
