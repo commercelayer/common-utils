@@ -82,12 +82,12 @@ jobs:
                   "elements": [
                     {
                       "type": "image",
-                      "image_url": "${{github.event.release.author.avatar_url}}",
-                      "alt_text": "${{github.event.release.author.login}}"
+                      "image_url": "${{github.event.sender.avatar_url}}",
+                      "alt_text": "${{github.event.sender.login}}"
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*${{github.event.release.author.login}}* has triggered this release."
+                      "text": "*${{github.event.sender.login}}* has triggered this release."
                     }
                   ]
                 }
