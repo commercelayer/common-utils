@@ -1,24 +1,24 @@
-# eslint-config-commercelayer-ts
+# eslint-config-ts
 
-Sharable `eslint` config with `standardJS` and `prettier` intended to be used with TypeScript projects.
+Sharable `eslint` config with `JS Standard` and `prettier` intended to be used with TypeScript projects.
 
-This configuration simply extends `standard-ts` rules and configures `prettier` as the default formatter to have better code indentation and wrapping.
+This configuration simply extends `standard-ts` rules and configures `prettier` as the default formatter to have better code indentation and text wrapping.
 
-In this way, it is possible to use all default JavaScript Standard rules but at the same time access and tune them using a regular eslint config file (especially for existing projects).
+In this way, it is possible to use all default JavaScript Standard rules but at the same time access and tune them using a regular ESLint config file (very useful for existing projects).
 
 ## How to use
 
 Install ESLinst along with this package
 
 ```
-npm install eslint @commercelayer/eslint-config-commercelayer-ts
+pnpm install eslint @commercelayer/eslint-config-ts
 ```
 
-Create a new file name `.eslintrc.json` with the following content:
+Create a new file `.eslintrc.json` with the following content:
 
 ```jsonc
 {
-  "extends": ["@commercelayer/eslint-config-commercelayer-ts"]
+  "extends": ["@commercelayer/eslint-config-ts"]
 }
 ```
 
