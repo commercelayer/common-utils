@@ -24,7 +24,8 @@ module.exports = {
         semi: false,
         singleQuote: true,
         jsxSingleQuote: true,
-        trailingComma: 'none'
+        trailingComma: 'none',
+        htmlWhitespaceSensitivity: 'ignore' // https://prettier.io/blog/2018/11/07/1.15.0.html#whitespace-sensitive-formatting
       }
     ]
   }
