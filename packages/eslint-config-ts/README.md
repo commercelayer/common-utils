@@ -11,7 +11,7 @@ In this way, it is possible to use all default JavaScript Standard rules but at 
 Install ESLinst along with this package
 
 ```
-pnpm install eslint @commercelayer/eslint-config-ts
+pnpm install -D eslint @commercelayer/eslint-config-ts
 ```
 
 Create a new file `.eslintrc.json` with the following content:

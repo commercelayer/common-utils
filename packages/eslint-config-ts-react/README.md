@@ -9,7 +9,7 @@ Please refer to `@commercelayer/eslint-config-ts` to learn more about the config
 Install ESLinst along with this package.
 
 ```
-pnpm install eslint @commercelayer/eslint-config-ts-react
+pnpm install -D eslint @commercelayer/eslint-config-ts-react
 ```
 
 Create a new file `.eslintrc.json` with the following content:
