@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "@commercelayer/eslint-config-ts": "workspace:^0.1.2",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
     "eslint-config-standard-jsx": "^11.0.0",
     "eslint-plugin-react": "^7.31.8"
   },
