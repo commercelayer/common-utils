@@ -35,7 +35,7 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
           pnpm -r publish --tag next --no-git-checks --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish 🚀 PRODUCTION
         if: '!github.event.release.prerelease'
@@ -43,7 +43,7 @@ jobs:
           npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
           pnpm -r publish --no-git-checks --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Post to a Slack channel
         id: slack
