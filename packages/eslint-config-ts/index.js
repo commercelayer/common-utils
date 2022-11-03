@@ -27,6 +27,7 @@ module.exports = {
         trailingComma: 'none',
         htmlWhitespaceSensitivity: 'ignore' // https://prettier.io/blog/2018/11/07/1.15.0.html#whitespace-sensitive-formatting
       }
-    ]
+    ],
+    '@typescript-eslint/switch-exhaustiveness-check': 'error'
   }
 }
