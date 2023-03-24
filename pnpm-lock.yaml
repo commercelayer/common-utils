@@ -39,7 +39,7 @@ importers:
 
   packages/eslint-config-ts-react:
     specifiers:
-      '@commercelayer/eslint-config-ts': workspace:^0.1.4
+      '@commercelayer/eslint-config-ts': workspace:^1.0.0-beta.0
       '@typescript-eslint/eslint-plugin': ^5.56.0
       '@typescript-eslint/parser': ^5.56.0
       eslint: ^8.36.0
