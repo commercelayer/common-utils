@@ -1,6 +1,6 @@
 {
   "name": "@commercelayer/eslint-config-ts-react",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0",
   "description": "ESLint config for React Typescript projects to use JS Standard rules and Prettier as formatter",
   "main": "index.js",
   "keywords": [
@@ -31,7 +31,7 @@
     "lint:fix": "pnpm eslint index.js --fix"
   },
   "dependencies": {
-    "@commercelayer/eslint-config-ts": "workspace:^1.0.0-beta.0",
+    "@commercelayer/eslint-config-ts": "workspace:^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "eslint-config-standard-jsx": "^11.0.0",
