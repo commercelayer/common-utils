@@ -51,7 +51,7 @@ importers:
   packages/eslint-config-ts-react:
     dependencies:
       '@commercelayer/eslint-config-ts':
-        specifier: workspace:^1.0.0
+        specifier: workspace:^1.0.1
         version: link:../eslint-config-ts
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.59.9
