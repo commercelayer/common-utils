@@ -10,6 +10,6 @@ export default defineConfig(() => ({
   minify: true,
   bundle: true,
   watch: env === 'development',
-  target: 'es2020',
+  target: 'es6',
   entry: ['src/index.ts']
 }))
