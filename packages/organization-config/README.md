@@ -12,7 +12,7 @@ you can use the function `getConfig` to manipulate the configuration settings of
 
 ```javascript
 getConfig({
-  jsonConfig: {},
+  jsonConfig: organizationConfig,
   market: 'market:id:hashid',
   params: { lang: 'en', orderId: 'your-order-id' }
 })
