@@ -1,4 +1,4 @@
-import merge from 'lodash/merge.js'
+import { merge } from 'merge-anything'
 
 export type NullableType<T> = T | null | undefined
 
@@ -86,8 +86,8 @@ export function getConfig({
     return null
   }
 
-  const defaultConfig = jsonConfig?.mfe?.default
-  const overrideConfig = market != null ? jsonConfig?.mfe[market] : {}
+  const defaultConfig = jsonConfig?.mfe?.default ?? {}
+  const overrideConfig = market != null ? jsonConfig?.mfe[market] ?? {} : {}
 
   // Replace placeholders in all string values within the object
   function replacePlaceholders(config: DefaultConfig): DefaultConfig {
