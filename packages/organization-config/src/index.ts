@@ -1,58 +1,93 @@
 import { merge } from 'merge-anything'
 
+/**
+ * Represents a type that can be null or undefined, making it optional in use.
+ * @template T The type that is being made nullable.
+ */
 export type NullableType<T> = T | null | undefined
 
+/**
+ * Params used by the getConfig function
+ */
 interface ConfigParams {
   /**
-   * language used to replace `:lang` placeholder
+   * Language code (e.g., 'en', 'fr') used to dynamically replace the `:lang` placeholder in URLs.
    */
   lang?: NullableType<string>
   /**
-   * accessToken used to replace `:access_token` placeholder
+   * Access token string used to replace the `:access_token` placeholder in URLs.
    */
   accessToken?: NullableType<string>
   /**
-   * order id used to replace `:order_id` placeholder
+   * Unique identifier for an order used to replace the `:order_id` placeholder in URLs.
    */
   orderId?: NullableType<string>
 }
 
+/**
+ * Configuration for overriding default links of the micro frontends,
+ * allowing customization of specific components.
+ */
 interface LinkConfig {
+  /** URL for a custom cart. */
   cart?: string
+  /** URL for a custom checkout */
   checkout?: string
+  /** URL for a custom my account */
   my_account?: string
+  /** URL for a custom identity */
   identity?: string
 }
 
 interface Country {
+  /** The country code (e.g., 'US', 'UK') */
   value: string
+  /** The display name of the country (e.g., 'United States', 'United Kingdom') */
   label: string
 }
 
 type StateConfig = Record<string, Country[]>
 
+/**
+ * Configuration settings for customizing the Checkout application.
+ */
 interface CheckoutConfig {
+  /** URL for a custom thank you page displayed after completing a purchase. */
   thankyou_page?: string
+  /** List of countries available for selection in billing address forms. */
   billing_countries?: Country[]
+  /** List of countries available for selection in shipping address forms. */
   shipping_countries?: Country[]
+  /** Configuration for states or regions to display in billing address forms, which may override default settings. */
   billing_states?: StateConfig[]
+  /** Configuration for states or regions to display in shipping address forms, which may override default settings. */
   shipping_states?: StateConfig[]
+  /** Country code preselected by default in billing and shipping address forms. */
   default_country?: string
 }
 
 interface UrlsConfig {
+  /** URL of the privacy policy page */
   privacy: string
+  /** URL of the terms and conditions page */
   terms: string
 }
 
+/** Interface of the config of the organization */
 export interface DefaultConfig {
+  /** Custom links for overriding default micro frontends. */
   links?: LinkConfig
+  /** Checkout-specific configuration, like custom thank you page and country lists. */
   checkout?: CheckoutConfig
+  /** URLs for privacy policy and terms of service pages. */
   urls?: UrlsConfig
 }
 
+/** Configuration structure containing defaults and market-specific overrides. */
 export interface Configs {
+  /** Default configuration applicable to all markets. */
   default: DefaultConfig
+  /** Market-specific configuration overrides, keyed by market identifier. */
   [key: string]: Partial<DefaultConfig>
 }
 
@@ -62,19 +97,23 @@ interface GetConfigProps {
    */
   jsonConfig?: { mfe?: Configs }
   /**
-   * `market:id:hashid` used to override default configuration
+   *  Market identifier for fetching specific configuration overrides. (`market:id:hashid`)
    */
   market?: string
   /**
-   * `params` used to replace url placeholders
+   * Parameters for replacing URL placeholders.
    */
   params?: ConfigParams
 }
 
 /**
- * The function is going to manipulate the organization configuration,
- * extract the `mfe` key and merge `default` configuration with overrides
- * for the market used.
+ * Retrieves and merges the default organization configuration with market-specific overrides based on the provided market identifier.
+ * Placeholder values in the configuration URLs can be replaced with actual values from the `params`.
+ *
+ * @param jsonConfig The complete configuration object of the organization.
+ * @param market The market identifier used to get market-specific configuration overrides.
+ * @param params The object containing replacement values for URL placeholders, such as language and access token.
+ * @returns The merged configuration object for the specified market, or null if no configuration is found.
  */
 export function getConfig({
   jsonConfig,
