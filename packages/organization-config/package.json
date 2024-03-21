@@ -39,7 +39,8 @@
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "test": "pnpm run lint && vitest run --silent",
     "bench": "vitest bench",
-    "build": "tsup"
+    "build": "tsup",
+    "jsr:publish": "pnpm dlx jsr publish"
   },
   "devDependencies": {
     "@commercelayer/eslint-config-ts": "workspace:^1.4.0",

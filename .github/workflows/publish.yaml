@@ -7,7 +7,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -44,6 +46,11 @@ jobs:
           pnpm -r publish --no-git-checks --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish 🚀 PRODUCTION on JSR.io
+        if: '!github.event.release.prerelease'
+        run: |
+          pnpm --filter '*' jsr:publish
 
       - name: Post to a Slack channel
         id: slack
