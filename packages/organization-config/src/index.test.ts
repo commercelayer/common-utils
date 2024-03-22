@@ -1,31 +1,83 @@
 import { describe, it, expect } from 'vitest'
 import { getConfig } from './index.js'
 
+export const defaultConfig = {
+  links: {
+    cart: 'https://cart.example.com/:order_id?accessToken=:access_token',
+    checkout: 'https://checkout.example.com/:order_id?accessToken=:access_token'
+  },
+  checkout: {
+    thankyou_page: 'https://example.com/thanks/:lang/:order_id',
+    billing_countries: [
+      {
+        value: 'ES',
+        label: 'Espana'
+      },
+      {
+        value: 'IT',
+        label: 'Italia'
+      },
+      {
+        value: 'US',
+        label: 'Unites States of America'
+      }
+    ],
+    defaultConfig: 'IT',
+    billing_states: {
+      FR: [
+        {
+          value: 'PA',
+          label: 'Paris'
+        },
+        {
+          value: 'LY',
+          label: 'Lyon'
+        },
+        {
+          value: 'NI',
+          label: 'Nice'
+        },
+        {
+          value: 'MA',
+          label: 'Marseille'
+        },
+        {
+          value: 'BO',
+          label: 'Bordeaux'
+        }
+      ],
+      IT: [
+        {
+          value: 'FI',
+          label: 'Firenze'
+        },
+        {
+          value: 'PO',
+          label: 'Prato'
+        },
+        {
+          value: 'LI',
+          label: 'Livorno'
+        }
+      ]
+    }
+  }
+}
+
+export const overrideConfig = {
+  links: {
+    cart: 'https://example.com/custom-cart/:order_id?accessToken=:access_token'
+  }
+}
+
+const jsonConfig = {
+  mfe: {
+    default: defaultConfig,
+    'market:id:ZKcv13rT': overrideConfig
+  }
+}
+
 describe('getConfig function', () => {
-  const defaultConfig = {
-    links: {
-      cart: 'https://cart.example.com/:order_id?accessToken=:access_token',
-      checkout:
-        'https://checkout.example.com/:order_id?accessToken=:access_token'
-    },
-    checkout: {
-      thankyou_page: 'https://example.com/thanks/:lang/:order_id'
-    }
-  }
-
-  const overrideConfig = {
-    links: {
-      cart: 'https://example.com/custom-cart/:order_id?accessToken=:access_token'
-    }
-  }
-
-  const jsonConfig = {
-    mfe: {
-      default: defaultConfig,
-      'market:id:ZKcv13rT': overrideConfig
-    }
-  }
-
   it('should return null if jsonConfig is empty', () => {
     expect(
       getConfig({ jsonConfig: {}, market: 'market:id:ZKcv13rT', params: {} })
@@ -96,5 +148,71 @@ describe('getConfig function', () => {
     expect(config?.checkout?.thankyou_page).toBe(
       'https://example.com/thanks/en/xyz789'
     )
+  })
+
+  it('should get countries', () => {
+    const params = { lang: 'en', accessToken: 'abc123', orderId: 'xyz789' }
+    const config = getConfig({
+      jsonConfig,
+      market: 'market:id:ZKcv13rT',
+      params
+    })
+
+    expect(config?.checkout?.billing_countries?.length).toBe(3)
+    expect(
+      config?.checkout?.billing_countries?.map((c) => c.value)
+    ).toStrictEqual(['ES', 'IT', 'US'])
+  })
+
+  it('should override countries and merge states', () => {
+    const countriesOverrideConfig = {
+      checkout: {
+        billing_countries: [
+          {
+            value: 'NO',
+            label: 'Norway'
+          }
+        ],
+        billing_states: {
+          NO: [
+            {
+              value: 'OS',
+              label: 'Oslo'
+            },
+            {
+              value: 'BE',
+              label: 'Bergen'
+            }
+          ]
+        }
+      }
+    }
+    const mergedConfig = {
+      mfe: {
+        default: defaultConfig,
+        'market:id:ZKcv13rT': countriesOverrideConfig
+      }
+    }
+
+    const params = { lang: 'en', accessToken: 'abc123', orderId: 'xyz789' }
+    const config = getConfig({
+      jsonConfig: mergedConfig,
+      market: 'market:id:ZKcv13rT',
+      params
+    })
+
+    expect(config?.checkout?.billing_countries?.length).toBe(1)
+    expect(
+      config?.checkout?.billing_countries?.map((c) => c.value)
+    ).toStrictEqual(['NO'])
+    expect(
+      config?.checkout?.billing_states != null &&
+        Object.keys(config?.checkout?.billing_states).length
+    ).toBe(3)
+
+    expect(
+      config?.checkout?.billing_states != null &&
+        Object.keys(config?.checkout?.billing_states)
+    ).toStrictEqual(['FR', 'IT', 'NO'])
   })
 })

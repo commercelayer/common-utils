@@ -46,7 +46,14 @@ interface Country {
   label: string
 }
 
-type StateConfig = Record<string, Country[]>
+interface State {
+  /** The province/state code (e.g., 'FI', 'LI') */
+  value: string
+  /** The display name of the province/state (e.g., 'Firenze', 'Livorno') */
+  label: string
+}
+
+type StatesConfig = Record<string, State[]>
 
 /**
  * Configuration settings for customizing the Checkout application.
@@ -59,9 +66,9 @@ interface CheckoutConfig {
   /** List of countries available for selection in shipping address forms. */
   shipping_countries?: Country[]
   /** Configuration for states or regions to display in billing address forms, which may override default settings. */
-  billing_states?: StateConfig[]
+  billing_states?: StatesConfig
   /** Configuration for states or regions to display in shipping address forms, which may override default settings. */
-  shipping_states?: StateConfig[]
+  shipping_states?: StatesConfig
   /** Country code preselected by default in billing and shipping address forms. */
   default_country?: string
 }
