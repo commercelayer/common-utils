@@ -1,6 +1,6 @@
 {
   "name": "@commercelayer/organization-config",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Organization config utils for extracting config by market",
   "author": {
     "name": "Matteo Alessani",
@@ -44,7 +44,7 @@
     "jsr:publish": "pnpm dlx jsr publish"
   },
   "devDependencies": {
-    "@commercelayer/eslint-config-ts": "workspace:^1.4.4",
+    "@commercelayer/eslint-config-ts": "workspace:^1.4.5",
     "@types/lodash": "^4.17.0",
     "deepmerge": "^4.3.1",
     "deepmerge-ts": "^5.1.0",
