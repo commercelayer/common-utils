@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "cjs",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@commercelayer/organization-config": "workspace:^1.4.3"
+  }
+}
