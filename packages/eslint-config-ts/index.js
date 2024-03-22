@@ -4,7 +4,7 @@ module.exports = {
     es2021: true
   },
   extends: [
-    'standard-with-typescript', // all standard and ts-standard rules from the official pkg
+    'love', // all standard and ts-standard rules from the official pkg
     'prettier' // disable other formatting rules
   ],
   parser: '@typescript-eslint/parser',

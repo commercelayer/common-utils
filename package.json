@@ -30,8 +30,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^8.0.0",
-    "npm-check-updates": "^16.14.12",
+    "lerna": "^8.1.2",
+    "npm-check-updates": "^16.14.17",
     "replace-in-file": "^7.1.0"
   }
 }
