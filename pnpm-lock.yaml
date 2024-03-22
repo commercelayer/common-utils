@@ -98,7 +98,7 @@ importers:
   packages/eslint-config-ts-react:
     dependencies:
       '@commercelayer/eslint-config-ts':
-        specifier: workspace:^1.4.0
+        specifier: workspace:^1.4.4
         version: link:../eslint-config-ts
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.3.1
@@ -130,7 +130,7 @@ importers:
         version: 5.1.7
     devDependencies:
       '@commercelayer/eslint-config-ts':
-        specifier: workspace:^1.4.0
+        specifier: workspace:^1.4.4
         version: link:../eslint-config-ts
       '@types/lodash':
         specifier: ^4.17.0
