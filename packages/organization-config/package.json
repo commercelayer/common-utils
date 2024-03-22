@@ -38,6 +38,7 @@
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "test": "pnpm run lint && vitest run --silent",
+    "test:verbose": "pnpm run lint && vitest run --silent=false",
     "bench": "vitest bench",
     "build": "tsup",
     "jsr:publish": "pnpm dlx jsr publish"
