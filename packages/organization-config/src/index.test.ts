@@ -215,4 +215,36 @@ describe('getConfig function', () => {
         Object.keys(config?.checkout?.billing_states)
     ).toStrictEqual(['FR', 'IT', 'NO'])
   })
+
+  it('should avoid value if not on default', () => {
+    const thankyouPageConfig = {
+      checkout: {
+        thankyou_page:
+          'https://example.com/thankyou/:order_id?accessToken=:access_token'
+      }
+    }
+    const mergedConfig = {
+      mfe: {
+        default: {},
+        'market:id:ZKcv13rT': thankyouPageConfig
+      }
+    }
+
+    const params = { lang: 'en', accessToken: 'abc123', orderId: 'xyz789' }
+    const config = getConfig({
+      jsonConfig: mergedConfig,
+      market: 'market:id:ZKcv13rT',
+      params
+    })
+
+    expect(config?.checkout?.thankyou_page).toBe(
+      'https://example.com/thankyou/xyz789?accessToken=abc123'
+    )
+
+    const defaultConfig = getConfig({
+      jsonConfig: mergedConfig,
+      params
+    })
+    expect(defaultConfig?.checkout?.thankyou_page).toBe(undefined)
+  })
 })
