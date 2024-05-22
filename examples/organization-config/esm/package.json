@@ -8,6 +8,6 @@
     "serve": "npx serve"
   },
   "dependencies": {
-    "@commercelayer/organization-config": "workspace:^1.4.3"
+    "@commercelayer/organization-config": "workspace:^1.4.5"
   }
 }
