@@ -22,6 +22,10 @@ interface ConfigParams {
    * Unique identifier for an order used to replace the `:order_id` placeholder in URLs.
    */
   orderId?: NullableType<string>
+  /**
+   * Unique identifier for an SKU list used to replace the `:order_id` placeholder in URLs.
+   */
+  skuListId?: NullableType<string>
 }
 
 /**
@@ -37,6 +41,8 @@ interface LinkConfig {
   my_account?: string
   /** URL for a custom identity */
   identity?: string
+  /** URL for a custom microstore */
+  microstore?: string
 }
 
 interface Country {
@@ -141,6 +147,7 @@ export function getConfig({
       .replace(/:lang/g, params?.lang ?? ':lang')
       .replace(/:access_token/g, params?.accessToken ?? ':access_token')
       .replace(/:order_id/g, params?.orderId ?? ':order_id')
+      .replace(/:sku_list_id/g, params?.skuListId ?? ':sku_list_id')
 
     return JSON.parse(replacedConfig)
   }
