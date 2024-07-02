@@ -41,7 +41,7 @@
     "test:verbose": "pnpm run lint && vitest run --silent=false",
     "bench": "vitest bench",
     "build": "tsup",
-    "jsr:publish": "pnpm dlx jsr publish"
+    "jsr:publish": "npx jsr publish"
   },
   "devDependencies": {
     "@commercelayer/eslint-config-ts": "workspace:^",
