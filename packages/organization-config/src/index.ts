@@ -23,9 +23,13 @@ interface ConfigParams {
    */
   orderId?: NullableType<string>
   /**
-   * Unique identifier for an SKU list used to replace the `:order_id` placeholder in URLs.
+   * Unique identifier for an SKU list used to replace the `:sku_list_id` placeholder in URLs.
    */
   skuListId?: NullableType<string>
+  /**
+   * Unique identifier for an SKU used to replace the `:sku_id` placeholder in URLs.
+   */
+  skuId?: NullableType<string>
 }
 
 /**
@@ -148,6 +152,7 @@ export function getConfig({
       .replace(/:access_token/g, params?.accessToken ?? ':access_token')
       .replace(/:order_id/g, params?.orderId ?? ':order_id')
       .replace(/:sku_list_id/g, params?.skuListId ?? ':sku_list_id')
+      .replace(/:sku_id/g, params?.skuId ?? ':sku_id')
 
     return JSON.parse(replacedConfig)
   }
