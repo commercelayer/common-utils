@@ -8,7 +8,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@commercelayer/organization-config": "workspace:^1.4.5"
+    "@commercelayer/organization-config": "workspace:^1.4.10"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.2.12",
