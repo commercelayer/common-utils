@@ -138,7 +138,6 @@ export function getConfig({
   params
 }: GetConfigProps): DefaultConfig | null {
   if (jsonConfig?.mfe == null) {
-    console.warn('No configuration found.')
     return null
   }
 
