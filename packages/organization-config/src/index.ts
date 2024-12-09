@@ -15,6 +15,10 @@ interface ConfigParams {
    */
   lang?: NullableType<string>
   /**
+   * Organization slug used to replace the `:slug` placeholder in URLs.
+   */
+  slug?: NullableType<string>
+  /**
    * Access token string used to replace the `:access_token` placeholder in URLs.
    */
   accessToken?: NullableType<string>
@@ -142,12 +146,13 @@ export function getConfig({
   }
 
   const defaultConfig = jsonConfig?.mfe?.default ?? {}
-  const overrideConfig = market != null ? jsonConfig?.mfe[market] ?? {} : {}
+  const overrideConfig = market != null ? (jsonConfig?.mfe[market] ?? {}) : {}
 
   // Replace placeholders in all string values within the object
   function replacePlaceholders(config: DefaultConfig): DefaultConfig {
     const replacedConfig = JSON.stringify(config)
       .replace(/:lang/g, params?.lang ?? ':lang')
+      .replace(/:slug/g, params?.slug ?? ':slug')
       .replace(/:access_token/g, params?.accessToken ?? ':access_token')
       .replace(/:order_id/g, params?.orderId ?? ':order_id')
       .replace(/:sku_list_id/g, params?.skuListId ?? ':sku_list_id')
