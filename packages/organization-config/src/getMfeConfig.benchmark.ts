@@ -1,9 +1,9 @@
-import { bench, describe } from 'vitest'
-import merge from 'lodash/merge'
 import dm from 'deepmerge'
 import { deepmerge as dmts } from 'deepmerge-ts'
+import merge from 'lodash/merge'
 import { merge as anything } from 'merge-anything'
-import { defaultConfig, overrideConfig } from './index.test.js'
+import { bench, describe } from 'vitest'
+import { defaultConfig, overrideConfig } from './getMfeConfig.test.js'
 
 describe('merging', () => {
   bench(
