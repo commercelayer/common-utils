@@ -90,7 +90,7 @@ interface UrlsConfig {
 }
 
 /** Interface of the config of the organization */
-export interface DefaultConfig {
+export interface DefaultMfeConfig {
   /** Custom links for overriding default micro frontends. */
   links?: LinkConfig
   /** Checkout-specific configuration, like custom thank you page and country lists. */
@@ -100,18 +100,18 @@ export interface DefaultConfig {
 }
 
 /** Configuration structure containing defaults and market-specific overrides. */
-export interface Configs {
+export interface MfeConfigs {
   /** Default configuration applicable to all markets. */
-  default: DefaultConfig
+  default: DefaultMfeConfig
   /** Market-specific configuration overrides, keyed by market identifier. */
-  [key: string]: Partial<DefaultConfig>
+  [key: string]: Partial<DefaultMfeConfig>
 }
 
 interface GetMfeConfigProps {
   /**
    * `config` attribute of the organization
    */
-  jsonConfig?: { mfe?: Configs }
+  jsonConfig?: { mfe?: MfeConfigs }
   /**
    *  Market identifier for fetching specific configuration overrides. (`market:id:hashid`)
    */
@@ -135,7 +135,7 @@ export function getMfeConfig({
   jsonConfig,
   market,
   params
-}: GetMfeConfigProps): DefaultConfig | null {
+}: GetMfeConfigProps): DefaultMfeConfig | null {
   if (jsonConfig?.mfe == null) {
     return null
   }
@@ -144,7 +144,7 @@ export function getMfeConfig({
   const overrideConfig = market != null ? (jsonConfig?.mfe[market] ?? {}) : {}
 
   // Replace placeholders in all string values within the object
-  function replacePlaceholders(config: DefaultConfig): DefaultConfig {
+  function replacePlaceholders(config: DefaultMfeConfig): DefaultMfeConfig {
     const replacedConfig = JSON.stringify(config)
       .replace(/:lang/g, params?.lang ?? ':lang')
       .replace(/:slug/g, params?.slug ?? ':slug')
@@ -156,7 +156,7 @@ export function getMfeConfig({
     return JSON.parse(replacedConfig)
   }
 
-  const mergedConfig: DefaultConfig = merge(
+  const mergedConfig: DefaultMfeConfig = merge(
     JSON.parse(JSON.stringify(defaultConfig)),
     overrideConfig
   )

@@ -1,1 +1,5 @@
-export { getMfeConfig, type Configs, type DefaultConfig } from './getMfeConfig'
+export {
+  getMfeConfig,
+  type MfeConfigs,
+  type DefaultMfeConfig
+} from './getMfeConfig'
