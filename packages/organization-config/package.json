@@ -41,16 +41,20 @@
     "test:verbose": "pnpm run lint && vitest run --silent=false",
     "bench": "vitest bench",
     "build": "tsup",
-    "jsr:publish": "npx jsr publish"
+    "jsr:publish": "npx jsr publish",
+    "generate:types": "node src/schema/generate.js"
   },
   "devDependencies": {
     "@commercelayer/eslint-config-ts": "workspace:^",
     "@types/lodash": "^4.17.6",
+    "@types/node": "^22.10.5",
     "deepmerge": "^4.3.1",
     "deepmerge-ts": "^7.0.3",
     "eslint": "^8.57.0",
+    "json-schema-to-typescript": "^15.0.3",
     "lodash": "^4.17.21",
     "tsup": "^8.1.0",
+    "type-fest": "^4.32.0",
     "typescript": "^5.5.2",
     "vitest": "^1.6.0"
   },

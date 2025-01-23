@@ -1,39 +1,38 @@
-import { type NullableType } from './types'
+import { type ValidConfigForOrganizationsInCommerceLayer } from './schema/types'
 
-type HideableItems = 'tags' | 'details' | 'metadata'
-type ItemsWithDefault = (typeof appsWithDefault)[number]
-
-// orders and customers are special cases with extended options
-const appsWithDefault = [
+const apps: Array<
+  keyof NonNullable<ValidConfigForOrganizationsInCommerceLayer['apps']>
+> = [
   'default',
   'bundles',
+  'customers',
   'exports',
   'gift_cards',
   'imports',
   'inventory',
+  'orders',
   'price_lists',
   'promotions',
+  'resources',
   'returns',
   'shipments',
-  'sku_lists',
   'skus',
+  'sku_lists',
   'stock_transfers',
   'subscriptions',
   'tags',
   'webhooks'
-] as const
+]
 
-export type AppsConfigWithDefault = Record<
-  'default' | ItemsWithDefault,
-  { hide: NullableType<HideableItems[]> }
-> & {
-  customers: {
-    hide: NullableType<Array<HideableItems | 'customer_groups'>>
-  }
-  orders: { hide: NullableType<Array<HideableItems | 'markets'>> }
-}
+export type AppsConfigWithDefault = NonNullable<
+  ValidConfigForOrganizationsInCommerceLayer['apps']
+>
 
-export type AppsConfig = Omit<AppsConfigWithDefault, 'default'>
+export type FullAppsConfig = Required<Omit<AppsConfigWithDefault, 'default'>>
+
+type HideableItems = NonNullable<
+  Required<AppsConfigWithDefault>['default']['hide']
+>
 
 /**
  * Get the apps configuration filling them with with the default values, if specified
@@ -42,12 +41,11 @@ export function getAppsConfig({
   jsonConfig
 }: {
   /** `config` attribute of the organization */
-  jsonConfig?: { apps?: Partial<AppsConfigWithDefault> }
-}): AppsConfig {
+  jsonConfig?: { apps?: AppsConfigWithDefault }
+}): FullAppsConfig {
   const cfg = jsonConfig?.apps ?? {}
-  const keys = [...appsWithDefault, 'orders', 'customers'] as const
 
-  return keys.reduce((acc, key) => {
+  return apps.reduce((acc, key) => {
     if (key === 'default') {
       return acc
     }
@@ -55,7 +53,7 @@ export function getAppsConfig({
       ...acc,
       [key]: mergeWithDefaults(cfg, key)
     }
-  }, {}) as AppsConfig
+  }, {}) as FullAppsConfig
 }
 
 /**
@@ -65,7 +63,7 @@ function mergeWithDefaults<
   Item extends keyof Omit<AppsConfigWithDefault, 'default'>
 >(cfg: Partial<AppsConfigWithDefault>, app: Item): AppsConfigWithDefault[Item] {
   const defaultHide = cfg.default?.hide ?? []
-  const itemHide = (cfg[app]?.hide ?? []) as HideableItems[]
+  const itemHide = (cfg[app]?.hide ?? []) as HideableItems
   const mergedDeduped = Array.from(new Set(defaultHide.concat(itemHide)))
   return {
     hide: mergedDeduped

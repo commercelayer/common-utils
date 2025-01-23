@@ -1,10 +1,20 @@
-import { describe, expect, it } from 'vitest'
+import { expect, describe, it } from 'vitest'
 import { getAppsConfig } from './getAppsConfig'
+import { type ValidConfigForOrganizationsInCommerceLayer } from './schema/types'
+
+// This ensure that all the apps are included in the test
+type Expected = Record<
+  Exclude<
+    keyof NonNullable<ValidConfigForOrganizationsInCommerceLayer['apps']>,
+    'default'
+  >,
+  { hide: string[] }
+>
 
 describe('getAppsConfig', () => {
   it('should return full config if initial config is empty', () => {
     const config = getAppsConfig({ jsonConfig: {} })
-    expect(config).toEqual({
+    const expected: Expected = {
       bundles: { hide: [] },
       customers: { hide: [] },
       exports: { hide: [] },
@@ -14,6 +24,7 @@ describe('getAppsConfig', () => {
       orders: { hide: [] },
       price_lists: { hide: [] },
       promotions: { hide: [] },
+      resources: { hide: [] },
       returns: { hide: [] },
       shipments: { hide: [] },
       sku_lists: { hide: [] },
@@ -22,7 +33,8 @@ describe('getAppsConfig', () => {
       subscriptions: { hide: [] },
       tags: { hide: [] },
       webhooks: { hide: [] }
-    })
+    }
+    expect(config).toEqual(expected)
   })
 
   it('should return default values for all items', () => {
@@ -33,7 +45,7 @@ describe('getAppsConfig', () => {
         }
       }
     })
-    expect(config).toEqual({
+    const expected: Expected = {
       bundles: { hide: ['details', 'metadata'] },
       customers: { hide: ['details', 'metadata'] },
       exports: { hide: ['details', 'metadata'] },
@@ -43,6 +55,7 @@ describe('getAppsConfig', () => {
       orders: { hide: ['details', 'metadata'] },
       price_lists: { hide: ['details', 'metadata'] },
       promotions: { hide: ['details', 'metadata'] },
+      resources: { hide: ['details', 'metadata'] },
       returns: { hide: ['details', 'metadata'] },
       shipments: { hide: ['details', 'metadata'] },
       sku_lists: { hide: ['details', 'metadata'] },
@@ -51,7 +64,8 @@ describe('getAppsConfig', () => {
       subscriptions: { hide: ['details', 'metadata'] },
       tags: { hide: ['details', 'metadata'] },
       webhooks: { hide: ['details', 'metadata'] }
-    })
+    }
+    expect(config).toEqual(expected)
   })
 
   it('should handle special cases and remove duplicated', () => {
@@ -65,7 +79,7 @@ describe('getAppsConfig', () => {
         }
       }
     })
-    expect(config).toEqual({
+    const expected: Expected = {
       bundles: { hide: ['details', 'metadata'] },
       customers: { hide: ['details', 'metadata', 'customer_groups'] },
       exports: { hide: ['details', 'metadata'] },
@@ -75,6 +89,7 @@ describe('getAppsConfig', () => {
       orders: { hide: ['details', 'metadata', 'markets'] },
       price_lists: { hide: ['details', 'metadata'] },
       promotions: { hide: ['details', 'metadata'] },
+      resources: { hide: ['details', 'metadata'] },
       returns: { hide: ['details', 'metadata'] },
       shipments: { hide: ['details', 'metadata', 'tags'] },
       sku_lists: { hide: ['details', 'metadata'] },
@@ -83,7 +98,8 @@ describe('getAppsConfig', () => {
       subscriptions: { hide: ['details', 'metadata'] },
       tags: { hide: ['details', 'metadata'] },
       webhooks: { hide: ['details', 'metadata'] }
-    })
+    }
+    expect(config).toEqual(expected)
   })
 
   it('should single apps when no defaults are specified', () => {
@@ -99,7 +115,7 @@ describe('getAppsConfig', () => {
         }
       }
     })
-    expect(config).toEqual({
+    const expected: Expected = {
       bundles: { hide: [] },
       customers: { hide: ['customer_groups', 'metadata'] },
       exports: { hide: [] },
@@ -109,6 +125,7 @@ describe('getAppsConfig', () => {
       orders: { hide: ['markets'] },
       price_lists: { hide: [] },
       promotions: { hide: [] },
+      resources: { hide: [] },
       returns: { hide: [] },
       shipments: { hide: ['tags', 'details'] },
       sku_lists: { hide: [] },
@@ -117,6 +134,7 @@ describe('getAppsConfig', () => {
       subscriptions: { hide: [] },
       tags: { hide: [] },
       webhooks: { hide: [] }
-    })
+    }
+    expect(config).toEqual(expected)
   })
 })
