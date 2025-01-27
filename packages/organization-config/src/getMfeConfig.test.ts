@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { getConfig } from './index.js'
+import { describe, expect, it } from 'vitest'
+import { getMfeConfig } from './getMfeConfig.js'
 
 export const defaultConfig = {
   links: {
@@ -77,15 +77,15 @@ const jsonConfig = {
   }
 }
 
-describe('getConfig function', () => {
+describe('getMfeConfig function', () => {
   it('should return null if jsonConfig is empty', () => {
     expect(
-      getConfig({ jsonConfig: {}, market: 'market:id:ZKcv13rT', params: {} })
+      getMfeConfig({ jsonConfig: {}, market: 'market:id:ZKcv13rT', params: {} })
     ).toBeNull()
   })
 
   it('should return the default config if there is no override', () => {
-    const config = getConfig({
+    const config = getMfeConfig({
       jsonConfig: { mfe: { default: defaultConfig } },
       market: 'non-existing-market',
       params: {}
@@ -94,7 +94,7 @@ describe('getConfig function', () => {
   })
 
   it('should return the default config if no override per market with replaced placeholder', () => {
-    const config = getConfig({
+    const config = getMfeConfig({
       jsonConfig,
       market: 'non-existing-market',
       params: {
@@ -112,7 +112,7 @@ describe('getConfig function', () => {
   })
 
   it('should merge default and override configs for a given market', () => {
-    const config = getConfig({
+    const config = getMfeConfig({
       jsonConfig,
       market: 'market:id:ZKcv13rT',
       params: {}
@@ -121,7 +121,7 @@ describe('getConfig function', () => {
   })
 
   it('should merge default and override configs for a given market replacing placeholders', () => {
-    const config = getConfig({
+    const config = getMfeConfig({
       jsonConfig,
       market: 'market:id:ZKcv13rT',
       params: {
@@ -137,7 +137,7 @@ describe('getConfig function', () => {
 
   it('should replace placeholders with provided parameters', () => {
     const params = { lang: 'en', accessToken: 'abc123', orderId: 'xyz789' }
-    const config = getConfig({
+    const config = getMfeConfig({
       jsonConfig,
       market: 'market:id:ZKcv13rT',
       params
@@ -152,7 +152,7 @@ describe('getConfig function', () => {
 
   it('should get countries', () => {
     const params = { lang: 'en', accessToken: 'abc123', orderId: 'xyz789' }
-    const config = getConfig({
+    const config = getMfeConfig({
       jsonConfig,
       market: 'market:id:ZKcv13rT',
       params
@@ -195,7 +195,7 @@ describe('getConfig function', () => {
     }
 
     const params = { lang: 'en', accessToken: 'abc123', orderId: 'xyz789' }
-    const config = getConfig({
+    const config = getMfeConfig({
       jsonConfig: mergedConfig,
       market: 'market:id:ZKcv13rT',
       params
@@ -231,7 +231,7 @@ describe('getConfig function', () => {
     }
 
     const params = { lang: 'en', accessToken: 'abc123', orderId: 'xyz789' }
-    const config = getConfig({
+    const config = getMfeConfig({
       jsonConfig: mergedConfig,
       market: 'market:id:ZKcv13rT',
       params
@@ -241,7 +241,7 @@ describe('getConfig function', () => {
       'https://example.com/thankyou/xyz789?accessToken=abc123'
     )
 
-    const defaultConfig = getConfig({
+    const defaultConfig = getMfeConfig({
       jsonConfig: mergedConfig,
       params
     })
