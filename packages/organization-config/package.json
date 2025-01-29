@@ -1,6 +1,6 @@
 {
   "name": "@commercelayer/organization-config",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Organization config utils for extracting config by market",
   "author": {
     "name": "Matteo Alessani",
