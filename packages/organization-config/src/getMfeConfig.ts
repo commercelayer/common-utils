@@ -57,8 +57,8 @@ export type MfeConfigs = NonNullable<
 >
 
 export type DefaultMfeConfig = NonNullable<
-  ValidConfigForOrganizationsInCommerceLayer['mfe']
->['default']
+  NonNullable<ValidConfigForOrganizationsInCommerceLayer['mfe']>['default']
+>
 
 /**
  * Retrieves and merges the default organization configuration with market-specific overrides based on the provided market identifier.
