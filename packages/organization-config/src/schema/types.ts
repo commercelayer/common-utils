@@ -82,7 +82,7 @@ export interface ValidConfigForOrganizationsInCommerceLayer {
      * Settings for app-orders.
      */
     orders?: {
-      hide?: ("metadata" | "tags" | "details" | "markets")[] | null;
+      hide?: ("metadata" | "tags" | "details" | "markets" | "create")[] | null;
     };
     price_lists?: AppsConfig;
     promotions?: AppsConfig;
