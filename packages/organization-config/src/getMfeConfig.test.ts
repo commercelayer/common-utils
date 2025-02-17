@@ -247,4 +247,34 @@ describe('getMfeConfig function', () => {
     })
     expect(defaultConfig?.checkout?.thankyou_page).toBe(undefined)
   })
+
+  it('should handle language as default', () => {
+    const config = getMfeConfig({
+      jsonConfig: {
+        mfe: {
+          default: {
+            language: 'en-US'
+          }
+        }
+      }
+    })
+    expect(config?.language).toBe('en-US')
+  })
+
+  it('should handle language as market override', () => {
+    const config = getMfeConfig({
+      jsonConfig: {
+        mfe: {
+          default: {
+            language: 'en-US'
+          },
+          'market:id:ZKcv13rT': {
+            language: 'it-IT'
+          }
+        }
+      },
+      market: 'market:id:ZKcv13rT'
+    })
+    expect(config?.language).toBe('it-IT')
+  })
 })
