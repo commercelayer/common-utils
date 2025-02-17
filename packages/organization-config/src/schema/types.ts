@@ -65,37 +65,6 @@ export interface ValidConfigForOrganizationsInCommerceLayer {
     default?: MfeConfig;
     [k: string]: MfeConfig | undefined;
   };
-  apps?: {
-    default?: AppsConfig;
-    bundles?: AppsConfig;
-    /**
-     * Settings for app-customers.
-     */
-    customers?: {
-      hide?: ("metadata" | "tags" | "details" | "customer_groups")[] | null;
-    };
-    exports?: AppsConfig;
-    gift_cards?: AppsConfig;
-    imports?: AppsConfig;
-    inventory?: AppsConfig;
-    /**
-     * Settings for app-orders.
-     */
-    orders?: {
-      hide?: ("metadata" | "tags" | "details" | "markets" | "create")[] | null;
-    };
-    price_lists?: AppsConfig;
-    promotions?: AppsConfig;
-    resources?: AppsConfig;
-    returns?: AppsConfig;
-    shipments?: AppsConfig;
-    skus?: AppsConfig;
-    sku_lists?: AppsConfig;
-    stock_transfers?: AppsConfig;
-    subscriptions?: AppsConfig;
-    tags?: AppsConfig;
-    webhooks?: AppsConfig;
-  };
   [k: string]: unknown;
 }
 /**
@@ -143,10 +112,8 @@ export interface MfeConfig {
     privacy?: Url;
     terms?: Url;
   };
-}
-/**
- * Default settings for the app.
- */
-export interface AppsConfig {
-  hide?: ("metadata" | "tags" | "details")[] | null;
+  /**
+   * Default language setting.
+   */
+  language?: string;
 }
