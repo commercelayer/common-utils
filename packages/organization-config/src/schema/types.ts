@@ -89,6 +89,7 @@ export interface MfeConfig {
    */
   checkout?: {
     thankyou_page?: Url;
+    optional_billing_info?: boolean;
     billing_countries?: StateCountry;
     shipping_countries?: StateCountry1;
     default_country?: CountryCode;
