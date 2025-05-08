@@ -79,7 +79,7 @@ export function getMfeConfig({
   }
 
   const defaultConfig = jsonConfig?.mfe?.default ?? {}
-  const overrideConfig = market != null ? jsonConfig?.mfe[market] ?? {} : {}
+  const overrideConfig = market != null ? (jsonConfig?.mfe[market] ?? {}) : {}
 
   // Replace placeholders in all string values within the object
   function replacePlaceholders(config: DefaultMfeConfig): DefaultMfeConfig {

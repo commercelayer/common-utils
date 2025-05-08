@@ -46,16 +46,16 @@
   },
   "devDependencies": {
     "@commercelayer/eslint-config-ts": "workspace:^",
-    "@types/lodash": "^4.17.6",
-    "@types/node": "^22.10.5",
+    "@types/lodash": "^4.17.16",
+    "@types/node": "^22.15.16",
     "deepmerge": "^4.3.1",
-    "deepmerge-ts": "^7.0.3",
+    "deepmerge-ts": "^7.1.5",
     "eslint": "^8.57.0",
-    "json-schema-to-typescript": "^15.0.3",
+    "json-schema-to-typescript": "^15.0.4",
     "lodash": "^4.17.21",
-    "tsup": "^8.1.0",
-    "type-fest": "^4.32.0",
-    "typescript": "^5.5.2",
+    "tsup": "^8.4.0",
+    "type-fest": "^4.41.0",
+    "typescript": "^5.8.3",
     "vitest": "^1.6.0"
   },
   "dependencies": {
