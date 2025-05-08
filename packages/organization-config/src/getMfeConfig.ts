@@ -1,5 +1,5 @@
-import { merge } from 'merge-anything'
-import { type ValidConfigForOrganizationsInCommerceLayer } from './schema/types'
+import { merge } from "merge-anything"
+import type { ValidConfigForOrganizationsInCommerceLayer } from "./schema/types"
 
 /**
  * Represents a type that can be null or undefined, making it optional in use.
@@ -28,6 +28,10 @@ interface ConfigParams {
    */
   orderId?: NullableType<string>
   /**
+   * Order token string used to replace the `:token` placeholder in URLs.
+   */
+  token?: NullableType<string>
+  /**
    * Unique identifier for an SKU list used to replace the `:sku_list_id` placeholder in URLs.
    */
   skuListId?: NullableType<string>
@@ -53,11 +57,11 @@ interface GetMfeConfigProps {
 }
 
 export type MfeConfigs = NonNullable<
-  ValidConfigForOrganizationsInCommerceLayer['mfe']
+  ValidConfigForOrganizationsInCommerceLayer["mfe"]
 >
 
 export type DefaultMfeConfig = NonNullable<
-  NonNullable<ValidConfigForOrganizationsInCommerceLayer['mfe']>['default']
+  NonNullable<ValidConfigForOrganizationsInCommerceLayer["mfe"]>["default"]
 >
 
 /**
@@ -72,31 +76,32 @@ export type DefaultMfeConfig = NonNullable<
 export function getMfeConfig({
   jsonConfig,
   market,
-  params
+  params,
 }: GetMfeConfigProps): DefaultMfeConfig | null {
   if (jsonConfig?.mfe == null) {
     return null
   }
 
   const defaultConfig = jsonConfig?.mfe?.default ?? {}
-  const overrideConfig = market != null ? jsonConfig?.mfe[market] ?? {} : {}
+  const overrideConfig = market != null ? (jsonConfig?.mfe[market] ?? {}) : {}
 
   // Replace placeholders in all string values within the object
   function replacePlaceholders(config: DefaultMfeConfig): DefaultMfeConfig {
     const replacedConfig = JSON.stringify(config)
-      .replace(/:lang/g, params?.lang ?? ':lang')
-      .replace(/:slug/g, params?.slug ?? ':slug')
-      .replace(/:access_token/g, params?.accessToken ?? ':access_token')
-      .replace(/:order_id/g, params?.orderId ?? ':order_id')
-      .replace(/:sku_list_id/g, params?.skuListId ?? ':sku_list_id')
-      .replace(/:sku_id/g, params?.skuId ?? ':sku_id')
+      .replace(/:lang/g, params?.lang ?? ":lang")
+      .replace(/:slug/g, params?.slug ?? ":slug")
+      .replace(/:token/g, params?.token ?? ":token")
+      .replace(/:access_token/g, params?.accessToken ?? ":access_token")
+      .replace(/:order_id/g, params?.orderId ?? ":order_id")
+      .replace(/:sku_list_id/g, params?.skuListId ?? ":sku_list_id")
+      .replace(/:sku_id/g, params?.skuId ?? ":sku_id")
 
     return JSON.parse(replacedConfig)
   }
 
   const mergedConfig: DefaultMfeConfig = merge(
     JSON.parse(JSON.stringify(defaultConfig)),
-    overrideConfig
+    overrideConfig,
   )
   return replacePlaceholders(mergedConfig)
 }
