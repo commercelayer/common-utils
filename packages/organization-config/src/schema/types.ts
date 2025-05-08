@@ -5,31 +5,31 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Url = string;
+export type Url = string
 /**
  * The international 2-letter country code as defined by the ISO 3166-1 standard.
  */
-export type CountryCode = string;
+export type CountryCode = string
 /**
  * List of billing countries by identifier and label.
  */
 export type StateCountry = {
-  value: CountryCode;
+  value: CountryCode
   /**
    * Name of the country.
    */
-  label: string;
-}[];
+  label: string
+}[]
 /**
  * List of shipping countries by identifier and label.
  */
 export type StateCountry1 = {
-  value: CountryCode;
+  value: CountryCode
   /**
    * Name of the country.
    */
-  label: string;
-}[];
+  label: string
+}[]
 /**
  * List of shipping countries by identifier and label.
  *
@@ -37,12 +37,12 @@ export type StateCountry1 = {
  * via the `patternProperty` "^.*$".
  */
 export type StateCountry2 = {
-  value: CountryCode;
+  value: CountryCode
   /**
    * Name of the country.
    */
-  label: string;
-}[];
+  label: string
+}[]
 /**
  * List of shipping countries by identifier and label.
  *
@@ -50,22 +50,22 @@ export type StateCountry2 = {
  * via the `patternProperty` "^.*$".
  */
 export type StateCountry3 = {
-  value: CountryCode;
+  value: CountryCode
   /**
    * Name of the country.
    */
-  label: string;
-}[];
+  label: string
+}[]
 
 /**
  * Payload to use when using the config field of the Organization on CommerceLayer.
  */
 export interface ValidConfigForOrganizationsInCommerceLayer {
   mfe?: {
-    default?: MfeConfig;
-    [k: string]: MfeConfig | undefined;
-  };
-  [k: string]: unknown;
+    default?: MfeConfig
+    [k: string]: MfeConfig | undefined
+  }
+  [k: string]: unknown
 }
 /**
  * Default settings for links and checkout.
@@ -78,43 +78,43 @@ export interface MfeConfig {
    * Links for specific micro frontends.
    */
   links?: {
-    cart?: Url;
-    checkout?: Url;
-    identity?: Url;
-    microstore?: Url;
-    my_account?: Url;
-  };
+    cart?: Url
+    checkout?: Url
+    identity?: Url
+    microstore?: Url
+    my_account?: Url
+  }
   /**
    * Settings for the Checkout micro front end.
    */
   checkout?: {
-    thankyou_page?: Url;
-    optional_billing_info?: boolean;
-    billing_countries?: StateCountry;
-    shipping_countries?: StateCountry1;
-    default_country?: CountryCode;
+    thankyou_page?: Url
+    optional_billing_info?: boolean
+    billing_countries?: StateCountry
+    shipping_countries?: StateCountry1
+    default_country?: CountryCode
     /**
      * List of states by country with identifier and label.
      */
     billing_states?: {
-      [k: string]: StateCountry2;
-    };
+      [k: string]: StateCountry2
+    }
     /**
      * List of states by country with identifier and label.
      */
     shipping_states?: {
-      [k: string]: StateCountry3;
-    };
-  };
+      [k: string]: StateCountry3
+    }
+  }
   /**
    * Checkout internal links settings.
    */
   urls?: {
-    privacy?: Url;
-    terms?: Url;
-  };
+    privacy?: Url
+    terms?: Url
+  }
   /**
    * Default language setting.
    */
-  language?: string;
+  language?: string
 }
