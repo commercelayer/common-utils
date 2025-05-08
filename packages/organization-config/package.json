@@ -1,6 +1,6 @@
 {
   "name": "@commercelayer/organization-config",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Organization config utils for extracting config by market",
   "author": {
     "name": "Matteo Alessani",
@@ -45,8 +45,8 @@
     "generate:types": "node src/schema/generate.js"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.16",
     "@biomejs/biome": "^1.9.4",
+    "@types/lodash": "^4.17.16",
     "@types/node": "^22.15.16",
     "deepmerge": "^4.3.1",
     "deepmerge-ts": "^7.1.5",
