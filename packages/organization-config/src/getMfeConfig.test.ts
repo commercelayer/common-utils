@@ -216,6 +216,68 @@ describe("getMfeConfig function", () => {
     expect(config?.language).toBe("en-US")
   })
 
+  it("should handle hide item code on checkout", () => {
+    const config = getMfeConfig({
+      jsonConfig: {
+        mfe: {
+          default: {
+            checkout: {
+              hide_item_codes: true,
+            },
+          },
+        },
+      },
+    })
+    expect(config?.checkout?.hide_item_codes).toBe(true)
+  })
+
+  it("should handle hide item code on cart", () => {
+    const config = getMfeConfig({
+      jsonConfig: {
+        mfe: {
+          default: {
+            cart: {
+              hide_item_codes: true,
+            },
+          },
+        },
+      },
+    })
+    expect(config?.cart?.hide_item_codes).toBe(true)
+  })
+
+  it("should handle hide item code on microstore", () => {
+    const config = getMfeConfig({
+      jsonConfig: {
+        mfe: {
+          default: {
+            microstore: {
+              hide_item_codes: true,
+            },
+          },
+        },
+      },
+    })
+    expect(config?.microstore?.hide_item_codes).toBe(true)
+  })
+
+  it("should handle hide item code on my-account and hide returns", () => {
+    const config = getMfeConfig({
+      jsonConfig: {
+        mfe: {
+          default: {
+            my_account: {
+              hide_item_codes: true,
+              hide_returns: true,
+            },
+          },
+        },
+      },
+    })
+    expect(config?.my_account?.hide_item_codes).toBe(true)
+    expect(config?.my_account?.hide_returns).toBe(true)
+  })
+
   it("should handle language as market override", () => {
     const config = getMfeConfig({
       jsonConfig: {

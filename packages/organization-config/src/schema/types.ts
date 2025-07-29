@@ -88,6 +88,7 @@ export interface MfeConfig {
    * Settings for the Checkout micro front end.
    */
   checkout?: {
+    hide_item_codes?: boolean
     thankyou_page?: Url
     optional_billing_info?: boolean
     billing_countries?: StateCountry
@@ -105,6 +106,25 @@ export interface MfeConfig {
     shipping_states?: {
       [k: string]: StateCountry3
     }
+  }
+  /**
+   * Settings for the Cart micro front end.
+   */
+  cart?: {
+    hide_item_codes?: boolean
+  }
+  /**
+   * Settings for the microstore micro front end.
+   */
+  microstore?: {
+    hide_item_codes?: boolean
+  }
+  /**
+   * Settings for the my-account micro front end.
+   */
+  my_account?: {
+    hide_item_codes?: boolean
+    hide_returns?: boolean
   }
   /**
    * Checkout internal links settings.
