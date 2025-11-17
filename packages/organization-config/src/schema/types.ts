@@ -5,31 +5,35 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type Url = string
+export type Url = string;
+/**
+ * Don't show promo code.
+ */
+export type HidePromoCode = boolean;
 /**
  * The international 2-letter country code as defined by the ISO 3166-1 standard.
  */
-export type CountryCode = string
+export type CountryCode = string;
 /**
  * List of billing countries by identifier and label.
  */
 export type StateCountry = {
-  value: CountryCode
+  value: CountryCode;
   /**
    * Name of the country.
    */
-  label: string
-}[]
+  label: string;
+}[];
 /**
  * List of shipping countries by identifier and label.
  */
 export type StateCountry1 = {
-  value: CountryCode
+  value: CountryCode;
   /**
    * Name of the country.
    */
-  label: string
-}[]
+  label: string;
+}[];
 /**
  * List of shipping countries by identifier and label.
  *
@@ -37,12 +41,12 @@ export type StateCountry1 = {
  * via the `patternProperty` "^.*$".
  */
 export type StateCountry2 = {
-  value: CountryCode
+  value: CountryCode;
   /**
    * Name of the country.
    */
-  label: string
-}[]
+  label: string;
+}[];
 /**
  * List of shipping countries by identifier and label.
  *
@@ -50,22 +54,69 @@ export type StateCountry2 = {
  * via the `patternProperty` "^.*$".
  */
 export type StateCountry3 = {
-  value: CountryCode
+  value: CountryCode;
   /**
    * Name of the country.
    */
-  label: string
-}[]
+  label: string;
+}[];
+/**
+ * Enable this option if you want to hide item codes.
+ */
+export type HideItemCodes = boolean;
 
 /**
  * Payload to use when using the config field of the Organization on CommerceLayer.
  */
 export interface ValidConfigForOrganizationsInCommerceLayer {
   mfe?: {
-    default?: MfeConfig
-    [k: string]: MfeConfig | undefined
-  }
-  [k: string]: unknown
+    default?: MfeConfig;
+    [k: string]: MfeConfig | undefined;
+  };
+  /**
+   * Default settings for apps.
+   */
+  apps?: {
+    /**
+     * Customers app settings.
+     */
+    customers?: {
+      /**
+       * Enable reset password flow for customers.
+       */
+      enable_reset_password?: boolean;
+    };
+    /**
+     * Orders app settings.
+     */
+    orders?: {
+      /**
+       * Enable this option to allow external price.
+       */
+      external_price?: boolean;
+    };
+  };
+  /**
+   * Organization API behavior settings.
+   */
+  api?: {
+    auth?: {
+      /**
+       * Allow JWT bearer token to see guest orders.
+       */
+      guest_orders?: boolean;
+    };
+    /**
+     * Stream pusher configuration.
+     */
+    stream?: {
+      /**
+       * Where streaming is enabled: none, live, test or both.
+       */
+      scope?: "none" | "live" | "test" | "both";
+    };
+  };
+  [k: string]: unknown;
 }
 /**
  * Default settings for links and checkout.
@@ -78,63 +129,91 @@ export interface MfeConfig {
    * Links for specific micro frontends.
    */
   links?: {
-    cart?: Url
-    checkout?: Url
-    identity?: Url
-    microstore?: Url
-    my_account?: Url
-  }
+    cart?: Url;
+    checkout?: Url;
+    identity?: Url;
+    microstore?: Url;
+    my_account?: Url;
+  };
   /**
    * Settings for the Checkout micro front end.
    */
   checkout?: {
-    hide_item_codes?: boolean
-    thankyou_page?: Url
-    optional_billing_info?: boolean
-    billing_countries?: StateCountry
-    shipping_countries?: StateCountry1
-    default_country?: CountryCode
+    /**
+     * Billing details not required for processing.
+     */
+    optional_billing_info?: boolean;
+    hide_promo_code?: HidePromoCode;
+    /**
+     * Company name not required for processing.
+     */
+    optional_company_name?: boolean;
+    /**
+     * Show notes.
+     */
+    show_notes?: boolean;
+    thankyou_page?: Url;
+    billing_countries?: StateCountry;
+    shipping_countries?: StateCountry1;
+    default_country?: CountryCode;
     /**
      * List of states by country with identifier and label.
      */
     billing_states?: {
-      [k: string]: StateCountry2
-    }
+      [k: string]: StateCountry2;
+    };
     /**
      * List of states by country with identifier and label.
      */
     shipping_states?: {
-      [k: string]: StateCountry3
-    }
-  }
-  /**
-   * Settings for the Cart micro front end.
-   */
-  cart?: {
-    hide_item_codes?: boolean
-  }
-  /**
-   * Settings for the microstore micro front end.
-   */
-  microstore?: {
-    hide_item_codes?: boolean
-  }
-  /**
-   * Settings for the my-account micro front end.
-   */
-  my_account?: {
-    hide_item_codes?: boolean
-    hide_returns?: boolean
-  }
+      [k: string]: StateCountry3;
+    };
+    hide_item_codes?: HideItemCodes;
+  };
   /**
    * Checkout internal links settings.
    */
   urls?: {
-    privacy?: Url
-    terms?: Url
-  }
+    privacy?: Url;
+    terms?: Url;
+  };
   /**
    * Default language setting.
    */
-  language?: string
+  language?: string;
+  /**
+   * Cart settings.
+   */
+  cart?: {
+    hide_item_codes?: HideItemCodes;
+    hide_promo_code?: HidePromoCode;
+  };
+  /**
+   * Microstore settings.
+   */
+  microstore?: {
+    hide_item_codes?: HideItemCodes;
+  };
+  /**
+   * My Account settings.
+   */
+  my_account?: {
+    hide_item_codes?: HideItemCodes;
+    /**
+     * Enable this option if you want to hide returns.
+     */
+    hide_returns?: boolean;
+    /**
+     * Enable this option if you want to hide subscriptions.
+     */
+    hide_subscriptions?: boolean;
+    /**
+     * Don't show the wallet.
+     */
+    hide_wallet?: boolean;
+    /**
+     * Don't show the logout.
+     */
+    hide_logout?: boolean;
+  };
 }
