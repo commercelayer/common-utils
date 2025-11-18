@@ -42,7 +42,7 @@
     "bench": "vitest bench",
     "build": "tsup",
     "jsr:publish": "npx jsr publish",
-    "generate:types": "node src/schema/generate.js"
+    "generate:types": "node src/schema/generate.js && pnpm run lint:fix"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.5",
