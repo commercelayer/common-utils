@@ -8,7 +8,7 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import { getConfig } from '@commercelayer/organization-config';
+import { getMfeConfig } from '@commercelayer/organization-config';
 
 export interface Env {
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
@@ -52,7 +52,7 @@ export default {
 			},
 		};
 
-		const config = getConfig({
+		const config = getMfeConfig({
 			jsonConfig,
 			market: 'market:id:ZKcv13rT',
 			params: {

@@ -45,15 +45,15 @@
     "generate:types": "node src/schema/generate.js && pnpm run lint:fix"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.5",
-    "@types/lodash": "^4.17.20",
+    "@biomejs/biome": "^2.3.9",
+    "@types/lodash": "^4.17.21",
     "@types/node": "^24.10.1",
     "deepmerge": "^4.3.1",
     "deepmerge-ts": "^7.1.5",
     "json-schema-to-typescript": "^15.0.4",
     "lodash": "^4.17.21",
     "tsup": "^8.5.1",
-    "type-fest": "^5.2.0",
+    "type-fest": "^5.3.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.10"
   },

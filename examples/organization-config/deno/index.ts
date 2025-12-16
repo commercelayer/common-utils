@@ -1,4 +1,4 @@
-import { getConfig } from '@commercelayer/organization-config'
+import { getMfeConfig } from '@commercelayer/organization-config'
 
 const defaultConfig = {
   links: {
@@ -23,7 +23,7 @@ const jsonConfig = {
   }
 }
 
-const config = getConfig({
+const config = getMfeConfig({
   jsonConfig,
   market: 'market:id:ZKcv13rT',
   params: {
