@@ -8,13 +8,13 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@commercelayer/organization-config": "workspace:^1.4.10"
+    "@commercelayer/organization-config": "workspace:*"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.2.12",
-    "@cloudflare/workers-types": "^4.20240512.0",
+    "@cloudflare/vitest-pool-workers": "^0.10.15 ",
+    "@cloudflare/workers-types": "^4.20251216.0",
     "typescript": ">=5.0",
-    "vitest": "1.6.0",
-    "wrangler": "^3.57.1"
+    "vitest": "^4.0.15",
+    "wrangler": "^4.54.0"
   }
 }

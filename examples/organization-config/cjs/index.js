@@ -1,6 +1,6 @@
 // @ts-check
 
-const { getConfig } = require('@commercelayer/organization-config')
+const { getMfeConfig } = require('@commercelayer/organization-config')
 
 async function run() {
   const defaultConfig = {
@@ -27,7 +27,7 @@ async function run() {
     }
   }
 
-  const config = getConfig({
+  const config = getMfeConfig({
     jsonConfig,
     market: 'market:id:ZKcv13rT',
     params: {

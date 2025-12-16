@@ -30,18 +30,8 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^9.0.1",
-    "npm-check-updates": "^19.1.2",
-    "replace-in-file": "^8.3.0"
-  },
-  "resolutions": {
-    "brace-expansion": ">=2.0.2",
-    "cross-spawn": ">=7.0.5",
-    "glob": ">=11.1.0",
-    "js-yaml": ">=4.1.1",
-    "tmp": ">=0.2.4",
-    "ejs": ">=3.1.10",
-    "tar": ">=6.2.1",
-    "undici": ">=5.28.4"
+    "lerna": "^9.0.3",
+    "npm-check-updates": "^19.2.0",
+    "replace-in-file": "^8.4.0"
   }
 }

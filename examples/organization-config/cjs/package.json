@@ -7,6 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "@commercelayer/organization-config": "workspace:^1.4.10"
+    "@commercelayer/organization-config": "workspace:*"
   }
 }
