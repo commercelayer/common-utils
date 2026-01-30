@@ -2,14 +2,16 @@
   "name": "@commercelayer/hono-pino-logger",
   "version": "1.0.0",
   "description": "Pino logger middleware for Hono with request/response logging",
+  "copyright": "©2026 Commerce Layer Inc.",
   "author": {
-    "name": "Matteo Alessani",
-    "email": "matteo@commercelayer.io"
+    "name": "Commerce Layer",
+    "email": "development@commercelayer.io"
   },
   "license": "MIT",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -24,6 +26,7 @@
     "pnpm": ">=7"
   },
   "keywords": [
+    "commercelayer",
     "hono",
     "pino",
     "logger",
@@ -35,11 +38,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/commercelayer/common-utils.git"
+    "url": "https://github.com/commercelayer/common-utils.git",
+    "directory": "packages/hono-pino-logger"
   },
   "bugs": {
     "url": "https://github.com/commercelayer/common-utils/issues"
   },
+  "homepage": "https://github.com/commercelayer/common-utils/tree/main/packages/hono-pino-logger#readme",
   "scripts": {
     "lint": "pnpm biome check src",
     "lint:fix": "pnpm biome check src --write",
