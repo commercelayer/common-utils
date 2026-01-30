@@ -76,7 +76,7 @@ app.get('/', (c) => {
   // Access logger from context
   const logger = c.get('logger')
   logger.info('Processing request')
-  
+
   return c.json({ message: 'Hello' })
 })
 ```
@@ -91,6 +91,7 @@ Hono middleware for logging HTTP requests and responses.
 - `config.logger` (optional): Custom Pino logger instance
 - `config.logRequestBody` (optional): Log request body (default: `false`)
 - `config.logResponseBody` (optional): Log response body (default: `false`)
+- `config.minimalOutput` (optional): Only output log message without extra attributes (default: `false`)
 
 **Returns:** Hono middleware function
 
@@ -98,6 +99,11 @@ Hono middleware for logging HTTP requests and responses.
 ```typescript
 app.use('*', honoHttpLogger({
   logRequestBody: true
+}))
+
+// Minimal output (only message, no extra attributes)
+app.use('*', honoHttpLogger({
+  minimalOutput: true
 }))
 ```
 
@@ -168,11 +174,11 @@ The logger is automatically attached to the Hono context:
 app.get('/user/:id', async (c) => {
   const logger = c.get('logger')
   const userId = c.req.param('id')
-  
+
   logger.info({ userId }, 'Fetching user')
-  
+
   // Your logic here
-  
+
   return c.json({ id: userId })
 })
 ```
@@ -206,10 +212,25 @@ app.use('/api/*', honoHttpLogger())
 app.get('/', (c) => c.text('Home'))
 ```
 
+### Minimal Output
+
+For cleaner logs without extra attributes:
+
+```typescript
+// Only outputs: method=GET path=/users status=200 duration=45ms
+app.use(honoHttpLogger({
+  minimalOutput: true
+}))
+
+// Default includes: request_id, user_agent, ip, http.request, http.response
+app.use(honoHttpLogger())
+```
+
 ## Log Output
 
 ### Development (Pretty Print)
 
+**Default:**
 ```
 [2026-01-29 10:30:45] INFO: method=GET path=/api/users status=200 duration=45ms
     request_id: "abc-123"
@@ -217,8 +238,14 @@ app.get('/', (c) => c.text('Home'))
     ip: "192.168.1.1"
 ```
 
+**Minimal Output:**
+```
+[2026-01-29 10:30:45] INFO: method=GET path=/api/users status=200 duration=45ms
+```
+
 ### Production (JSON)
 
+**Default:**
 ```json
 {
   "level": "INFO",
@@ -240,15 +267,24 @@ app.get('/', (c) => c.text('Home'))
 }
 ```
 
+**Minimal Output:**
+```json
+{
+  "level": "INFO",
+  "time": 1738152645000,
+  "msg": "method=GET path=/api/users status=200 duration=45ms"
+}
+```
+
 ## TypeScript
 
 Full TypeScript support with exported types:
 
 ```typescript
-import type { 
-  LoggerConfig, 
-  HttpLoggerConfig, 
-  RequestLogger 
+import type {
+  LoggerConfig,
+  HttpLoggerConfig,
+  RequestLogger
 } from '@commercelayer/hono-pino-logger'
 
 const config: LoggerConfig = {

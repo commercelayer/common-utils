@@ -10,7 +10,11 @@ import type { HttpLoggerConfig } from './types'
  * @returns A configured pino-http middleware function
  */
 export function createHttpLogger(config?: HttpLoggerConfig) {
-  const { logger = defaultLogger, logRequestBody = false } = config ?? {}
+  const {
+    logger = defaultLogger,
+    logRequestBody = false,
+    minimalOutput = false,
+  } = config ?? {}
 
   return pinoHttp({
     logger,
@@ -35,36 +39,47 @@ export function createHttpLogger(config?: HttpLoggerConfig) {
       const path = req.url?.split('?')[0] || req.url
       return `method=${req.method} path=${path} status=${res.statusCode} duration=${responseTime}ms - ${err.message}`
     },
-    customAttributeKeys: {
-      req: 'http.request',
-      res: 'http.response',
-      err: 'error',
-      responseTime: 'http.responseTime',
-    },
-    serializers: {
-      req: (req) => {
-        return {
-          method: req.method,
-          url: req.url?.split('?')[0],
-          query: req.query,
-          body: logRequestBody ? req.body : undefined,
-          remote_address: req.remoteAddress,
-          remote_port: req.remotePort,
+    customAttributeKeys: minimalOutput
+      ? undefined
+      : {
+          req: 'http.request',
+          res: 'http.response',
+          err: 'error',
+          responseTime: 'http.responseTime',
+        },
+    serializers: minimalOutput
+      ? {
+          req: () => undefined,
+          res: () => undefined,
+          err: () => undefined,
+          responseTime: () => undefined,
         }
-      },
-    },
-    customProps: (req) => {
-      return {
-        request_id: req.id,
-        user_agent: req.headers['user-agent'],
-        host: req.headers.host,
-        ip:
-          req.headers['x-forwarded-for'] ||
-          req.headers['x-real-ip'] ||
-          req.socket?.remoteAddress,
-        protocol: req.headers['x-forwarded-proto'] || 'http',
-      }
-    },
+      : {
+          req: (req) => {
+            return {
+              method: req.method,
+              url: req.url?.split('?')[0],
+              query: req.query,
+              body: logRequestBody ? req.body : undefined,
+              remote_address: req.remoteAddress,
+              remote_port: req.remotePort,
+            }
+          },
+        },
+    customProps: minimalOutput
+      ? undefined
+      : (req) => {
+          return {
+            request_id: req.id,
+            user_agent: req.headers['user-agent'],
+            host: req.headers.host,
+            ip:
+              req.headers['x-forwarded-for'] ||
+              req.headers['x-real-ip'] ||
+              req.socket?.remoteAddress,
+            protocol: req.headers['x-forwarded-proto'] || 'http',
+          }
+        },
   })
 }
 
