@@ -1,5 +1,5 @@
 import type { Context, Next } from 'hono'
-import { pinoHttp } from 'pino-http'
+import { type HttpLogger, pinoHttp } from 'pino-http'
 import { logger as defaultLogger } from './logger'
 import type { HttpLoggerConfig } from './types'
 
@@ -9,7 +9,7 @@ import type { HttpLoggerConfig } from './types'
  * @param config - Optional configuration for the HTTP logger
  * @returns A configured pino-http middleware function
  */
-export function createHttpLogger(config?: HttpLoggerConfig) {
+export function createHttpLogger(config?: HttpLoggerConfig): HttpLogger {
   const {
     logger = defaultLogger,
     logRequestBody = false,
@@ -112,7 +112,7 @@ export function createHttpLogger(config?: HttpLoggerConfig) {
  * app.use('*', honoHttpLogger({ logger: customLogger }))
  * ```
  */
-export function honoHttpLogger(config?: HttpLoggerConfig) {
+export function honoHttpLogger(config?: HttpLoggerConfig): Promise<void> | ((c: Context, next: Next) => Promise<void>) {
   const httpLogger = createHttpLogger(config)
 
   return async (c: Context, next: Next) => {
