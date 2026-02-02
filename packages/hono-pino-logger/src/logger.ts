@@ -48,4 +48,4 @@ export function createLogger(config?: LoggerConfig): Logger {
 /**
  * Default logger instance using environment-based configuration.
  */
-export const logger = createLogger()
+export const logger: Logger = createLogger()
