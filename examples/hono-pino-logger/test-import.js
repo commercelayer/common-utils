@@ -11,6 +11,6 @@ logger.info('Test log message')
 console.log('✓ Logger created and working')
 
 // Test creating HTTP logger middleware
-const middleware = honoHttpLogger()
+honoHttpLogger()
 console.log('✓ HTTP logger middleware created')
 console.log('✓ All imports and basic functionality working!')

@@ -3,7 +3,7 @@ import { requestId } from "hono/request-id"
 import { serve } from '@hono/node-server'
 import { honoHttpLogger, createLogger } from '@commercelayer/hono-pino-logger'
 import type { Logger } from 'pino'
-import { v4 as uuidv4 } from 'uuid'
+import { randomUUID } from 'node:crypto'
 
 type Variables = {
   logger: Logger
@@ -12,11 +12,11 @@ type Variables = {
 
 const app = new Hono<{ Variables: Variables }>()
 
+// Add request ID middleware (optional but recommended)
+app.use(requestId())
+
 // Example 1: Basic usage with default logger
 app.use(honoHttpLogger())
-
-// Example 2: Add request ID middleware (optional but recommended)
-app.use(requestId())
 
 // Example routes demonstrating logger usage
 app.get('/', (c) => {
@@ -60,7 +60,7 @@ app.post('/users', async (c) => {
 
   // Simulate user creation
   const newUser = {
-    id: uuidv4(),
+    id: randomUUID(),
     ...body,
   }
 
@@ -83,7 +83,7 @@ app.get('/warn', (c) => {
   return c.json({ warning: 'This is a warning' }, 400)
 })
 
-// Example 3: Custom logger configuration
+// Example 2: Custom logger configuration
 const customApp = new Hono<{ Variables: Variables }>()
 
 const customLogger = createLogger({

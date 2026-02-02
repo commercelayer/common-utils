@@ -188,12 +188,9 @@ app.get('/user/:id', async (c) => {
 If you set a `requestId` in the Hono context, it will be included in logs:
 
 ```typescript
-import { v4 as uuidv4 } from 'uuid'
+import { requestId } from "hono/request-id"
 
-app.use('*', async (c, next) => {
-  c.set('requestId', uuidv4())
-  await next()
-})
+app.use(requestId())
 
 app.use('*', honoHttpLogger())
 ```
