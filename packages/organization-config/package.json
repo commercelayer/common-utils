@@ -58,6 +58,7 @@
     "vitest": "^4.0.10"
   },
   "dependencies": {
+    "@commercelayer/js-auth": "^7.2.0",
     "merge-anything": "^5.1.7"
   }
 }
