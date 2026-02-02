@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org
-          cache: 'pnpm'
+          cache: false  # Disable cache pnpm/npm
 
       - name: Update npm
         run: npm install -g npm@latest
