@@ -90,7 +90,6 @@ Hono middleware for logging HTTP requests and responses.
 **Parameters:**
 - `config.logger` (optional): Custom Pino logger instance
 - `config.logRequestBody` (optional): Log request body (default: `false`)
-- `config.logResponseBody` (optional): Log response body (default: `false`)
 - `config.minimalOutput` (optional): Only output log message without extra attributes (default: `false`)
 
 **Returns:** Hono middleware function

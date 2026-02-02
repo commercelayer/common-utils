@@ -42,12 +42,6 @@ export interface HttpLoggerConfig {
   logRequestBody?: boolean
 
   /**
-   * Whether to log response body.
-   * @default false
-   */
-  logResponseBody?: boolean
-
-  /**
    * Enable minimal output with only the log message, without extra attributes.
    * When true, excludes request_id, user_agent, ip, and detailed request/response objects.
    * @default false

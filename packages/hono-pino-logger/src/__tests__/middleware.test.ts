@@ -137,7 +137,6 @@ describe('honoHttpLogger', () => {
   it('should accept custom configuration', async () => {
     const middleware = honoHttpLogger({
       logRequestBody: true,
-      logResponseBody: false,
     })
 
     expect(middleware).toBeDefined()
