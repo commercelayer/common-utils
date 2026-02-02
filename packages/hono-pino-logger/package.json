@@ -51,7 +51,7 @@
     "test": "pnpm run lint && vitest run --silent",
     "test:verbose": "pnpm run lint && vitest run --silent=false",
     "build": "tsup",
-    "jsr:publish": "npx jsr publish"
+    "jsr:publish": "pnpx jsr publish"
   },
   "dependencies": {
     "pino": "^9.6.0",

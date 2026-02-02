@@ -41,7 +41,7 @@
     "test:verbose": "pnpm run lint && vitest run --silent=false",
     "bench": "vitest bench",
     "build": "tsup",
-    "jsr:publish": "npx jsr publish",
+    "jsr:publish": "pnpx jsr publish",
     "generate:types": "node src/schema/generate.js && pnpm run lint:fix"
   },
   "devDependencies": {
