@@ -1,3 +1,4 @@
+import { jwtDecode } from "@commercelayer/js-auth"
 import { merge } from "merge-anything"
 import type { ValidConfigForOrganizationsInCommerceLayer } from "./schema/types"
 
@@ -45,7 +46,7 @@ interface GetMfeConfigProps {
   /**
    * `config` attribute of the organization
    */
-  jsonConfig?: { mfe?: MfeConfigs }
+  jsonConfig?: { mfe?: MfeConfigs } | null
   /**
    *  Market identifier for fetching specific configuration overrides. (`market:id:hashid`)
    */
@@ -78,12 +79,12 @@ export function getMfeConfig({
   market,
   params,
 }: GetMfeConfigProps): DefaultMfeConfig | null {
-  if (jsonConfig?.mfe == null) {
-    return null
-  }
+  const defaultConfig = merge(
+    getDefaults({ params }),
+    jsonConfig?.mfe?.default ?? {},
+  )
 
-  const defaultConfig = jsonConfig?.mfe?.default ?? {}
-  const overrideConfig = market != null ? (jsonConfig?.mfe[market] ?? {}) : {}
+  const overrideConfig = market != null ? (jsonConfig?.mfe?.[market] ?? {}) : {}
 
   // Replace placeholders in all string values within the object
   function replacePlaceholders(config: DefaultMfeConfig): DefaultMfeConfig {
@@ -103,5 +104,54 @@ export function getMfeConfig({
     JSON.parse(JSON.stringify(defaultConfig)),
     overrideConfig,
   )
+
+  if (Object.keys(mergedConfig).length === 0) {
+    return null
+  }
+
   return replacePlaceholders(mergedConfig)
+}
+
+/**
+ * Provides default MFE configuration.
+ */
+function getDefaults({ params }: GetMfeConfigProps): DefaultMfeConfig {
+  if (params?.accessToken == null) {
+    return {}
+  }
+
+  try {
+    const jwt = jwtDecode(params.accessToken)
+    const slug =
+      params.slug ??
+      ("organization" in jwt.payload ? jwt.payload.organization.slug : null)
+
+    if (slug == null) {
+      return {}
+    }
+
+    const domainPrefix = jwt.payload.iss.endsWith("commercelayer.co")
+      ? ".stg"
+      : ""
+
+    const appEndpoint = `https://${slug}${domainPrefix}.commercelayer.app`
+
+    const defaultConfig: DefaultMfeConfig = {
+      links: {
+        cart: `${appEndpoint}/cart/:order_id?accessToken=:access_token`,
+        checkout: `${appEndpoint}/checkout/:order_id?accessToken=:access_token`,
+        my_account: `${appEndpoint}/my-account?accessToken=:access_token`,
+        identity: `${appEndpoint}/identity`,
+        microstore:
+          params.skuListId != null
+            ? `${appEndpoint}/microstore/list/:sku_list_id?accessToken=:access_token`
+            : `${appEndpoint}/microstore/sku/:sku_id?accessToken=:access_token`,
+      },
+    }
+
+    return defaultConfig
+  } catch (_error) {
+    console.log(_error)
+    return {}
+  }
 }

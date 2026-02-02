@@ -119,6 +119,9 @@ importers:
 
   packages/organization-config:
     dependencies:
+      '@commercelayer/js-auth':
+        specifier: ^7.2.0
+        version: 7.2.0
       merge-anything:
         specifier: ^5.1.7
         version: 5.1.7
@@ -231,6 +234,10 @@ packages:
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
+
+  '@commercelayer/js-auth@7.2.0':
+    resolution: {integrity: sha512-p6GLDsDz2C9I8Mq8bZtDhTqMPco2Vi7emuIy+sAWr1fEnu66JMwMi7hrM+NBMcEOnFAjYBh2B2R+1KZsp+bMTA==}
+    engines: {node: '>=20.0.0'}
 
   '@emnapi/core@1.3.1':
     resolution: {integrity: sha512-pVGjBIt1Y6gg3EJN8jTcfpP/+uuRksIo055oE/OBkDNcjZqVbfkWCksG1Jp4yZnj3iKWyWX8fdG/j6UDYPbFog==}
@@ -4724,6 +4731,8 @@ snapshots:
 
   '@biomejs/cli-win32-x64@2.3.9':
     optional: true
+
+  '@commercelayer/js-auth@7.2.0': {}
 
   '@emnapi/core@1.3.1':
     dependencies:
