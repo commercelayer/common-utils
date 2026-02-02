@@ -1,0 +1,74 @@
+{
+  "name": "@commercelayer/hono-pino-logger",
+  "version": "1.0.0",
+  "description": "Pino logger middleware for Hono with request/response logging",
+  "copyright": "©2026 Commerce Layer Inc.",
+  "author": {
+    "name": "Commerce Layer",
+    "email": "development@commercelayer.io"
+  },
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=7"
+  },
+  "keywords": [
+    "commercelayer",
+    "hono",
+    "pino",
+    "logger",
+    "logging",
+    "middleware",
+    "http",
+    "request",
+    "response"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercelayer/common-utils.git",
+    "directory": "packages/hono-pino-logger"
+  },
+  "bugs": {
+    "url": "https://github.com/commercelayer/common-utils/issues"
+  },
+  "homepage": "https://github.com/commercelayer/common-utils/tree/main/packages/hono-pino-logger#readme",
+  "scripts": {
+    "lint": "pnpm biome check src",
+    "lint:fix": "pnpm biome check src --write",
+    "test": "pnpm run lint && vitest run --silent",
+    "test:verbose": "pnpm run lint && vitest run --silent=false",
+    "build": "tsup",
+    "jsr:publish": "npx jsr publish"
+  },
+  "dependencies": {
+    "pino": "^9.6.0",
+    "pino-http": "^10.3.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.9",
+    "@hono/node-server": "^1.14.0",
+    "@types/node": "^24.10.1",
+    "hono": "^4.6.15",
+    "pino-pretty": "^13.0.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  },
+  "peerDependencies": {
+    "@hono/node-server": "^1.0.0",
+    "hono": "^4.0.0"
+  }
+}
