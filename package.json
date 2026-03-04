@@ -4,8 +4,10 @@
   "description": "A set of common utilities internally used in Commerce Layer.",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "build": "pnpm --filter '*' build",
-    "test": "pnpm --filter '*' test",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "test": "pnpm -r test",
     "dep:upgrade:major": "pnpm -r exec npm-check-updates -u",
     "dep:upgrade:minor": "pnpm dep:upgrade:major -t minor",
     "dep:self-upgrade:major": "pnpm exec npm-check-updates -u",
