@@ -112,7 +112,9 @@ export function createHttpLogger(config?: HttpLoggerConfig): HttpLogger {
  * app.use('*', honoHttpLogger({ logger: customLogger }))
  * ```
  */
-export function honoHttpLogger(config?: HttpLoggerConfig): Promise<void> | ((c: Context, next: Next) => Promise<void>) {
+export function honoHttpLogger(
+  config?: HttpLoggerConfig
+): Promise<void> | ((c: Context, next: Next) => Promise<void>) {
   const httpLogger = createHttpLogger(config)
 
   return async (c: Context, next: Next) => {

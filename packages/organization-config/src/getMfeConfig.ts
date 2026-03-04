@@ -1,5 +1,6 @@
 import { jwtDecode } from "@commercelayer/js-auth"
 import { merge } from "merge-anything"
+import type { SetRequired } from "type-fest"
 import type { ValidConfigForOrganizationsInCommerceLayer } from "./schema/types"
 
 /**
@@ -154,4 +155,24 @@ function getDefaults({ params }: GetMfeConfigProps): DefaultMfeConfig {
     console.log(_error)
     return {}
   }
+}
+
+export function hasValidLinks(
+  config: ReturnType<typeof getMfeConfig>,
+): config is MfeConfigWithLinks {
+  return (
+    config != null &&
+    config.links != null &&
+    config.links.cart != null &&
+    config.links.checkout != null &&
+    config.links.identity != null &&
+    config.links.my_account != null
+  )
+}
+
+export type MfeConfigWithLinks = Omit<DefaultMfeConfig, "links"> & {
+  links: SetRequired<
+    NonNullable<DefaultMfeConfig["links"]>,
+    "cart" | "checkout" | "identity" | "my_account"
+  >
 }

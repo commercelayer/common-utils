@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getMfeConfig } from "./getMfeConfig"
+import { getMfeConfig, hasValidLinks } from "./getMfeConfig"
 import { defaultConfig, overrideConfig } from "./testHelper"
 
 const jsonConfig = {
@@ -388,6 +388,34 @@ describe("getMfeConfig function", () => {
         my_account: `https://demo-store.commercelayer.app/my-account?accessToken=${ioAccessToken}`,
       },
     })
+  })
+})
+
+describe("hasValidLinks function", () => {
+  it("should return true if config has valid links", () => {
+    const config = {
+      links: {
+        cart: "https://example.com/cart",
+        checkout: "https://example.com/checkout",
+        identity: "https://example.com/identity",
+        my_account: "https://example.com/my-account",
+      },
+    }
+    expect(hasValidLinks(config)).toBe(true)
+  })
+
+  it("should return false if config is null", () => {
+    expect(hasValidLinks(null)).toBe(false)
+  })
+
+  it("should return false if links are missing", () => {
+    const config = {
+      links: {
+        cart: "https://example.com/cart",
+        checkout: "https://example.com/checkout",
+      },
+    }
+    expect(hasValidLinks(config)).toBe(false)
   })
 })
 
