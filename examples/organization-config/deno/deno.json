@@ -1,6 +1,6 @@
 {
   "imports": {
-    "@commercelayer/organization-config": "jsr:@commercelayer/organization-config@^2.5.0"
+    "@commercelayer/organization-config": "jsr:@commercelayer/organization-config@^2.8.0"
   },
   "tasks": {
     "start": "deno run --allow-net index.ts"
