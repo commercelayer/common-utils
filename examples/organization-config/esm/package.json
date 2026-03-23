@@ -9,8 +9,5 @@
   },
   "dependencies": {
     "@commercelayer/organization-config": "workspace:*"
-  },
-  "resolutions": {
-    "minimatch": ">=9.0.7"
   }
 }

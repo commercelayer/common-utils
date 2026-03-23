@@ -16,8 +16,5 @@
     "typescript": ">=5.0",
     "vitest": "^4.0.15",
     "wrangler": "^4.76.0"
-  },
-	"resolutions": {
-		"minimatch": ">=9.0.7"
-	}
+  }
 }
