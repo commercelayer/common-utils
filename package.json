@@ -35,8 +35,5 @@
     "lerna": "^9.0.3",
     "npm-check-updates": "^19.2.0",
     "replace-in-file": "^8.4.0"
-  },
-  "resolutions": {
-    "minimatch": ">=9.0.7"
   }
 }
