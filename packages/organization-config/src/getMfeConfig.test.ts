@@ -311,6 +311,25 @@ describe("getMfeConfig function", () => {
     expect(config?.language).toBe("it-IT")
   })
 
+  it("should use default links even when params are not set", () => {
+    const config = getMfeConfig({
+      jsonConfig: null,
+      params: {
+        accessToken: ioAccessToken,
+      },
+      market: "market:id:ZKcv13rT",
+    })
+    expect(config).toMatchObject({
+      links: {
+        cart: `https://demo-store.commercelayer.app/cart/:order_id?accessToken=${ioAccessToken}`,
+        checkout: `https://demo-store.commercelayer.app/checkout/:order_id?accessToken=${ioAccessToken}`,
+        identity: `https://demo-store.commercelayer.app/identity/:identity_type?clientId=:client_id&scope=:scope`,
+        microstore: `https://demo-store.commercelayer.app/microstore/sku/:sku_id?accessToken=${ioAccessToken}`,
+        my_account: `https://demo-store.commercelayer.app/my-account?accessToken=${ioAccessToken}`,
+      },
+    })
+  })
+
   it("should use default links set to our official build-in apps (microstore as list)", () => {
     const config = getMfeConfig({
       jsonConfig: null,
@@ -318,6 +337,12 @@ describe("getMfeConfig function", () => {
         accessToken: ioAccessToken,
         orderId: "order123",
         skuListId: "skuList123",
+        identityType: "login",
+        clientId: "client123",
+        scope: "scope123",
+        publicScope: "public_scope123",
+        returnUrl: "https://example.com/return",
+        resetPasswordUrl: "https://example.com/reset-password",
       },
       market: "market:id:ZKcv13rT",
     })
@@ -325,7 +350,7 @@ describe("getMfeConfig function", () => {
       links: {
         cart: `https://demo-store.commercelayer.app/cart/order123?accessToken=${ioAccessToken}`,
         checkout: `https://demo-store.commercelayer.app/checkout/order123?accessToken=${ioAccessToken}`,
-        identity: `https://demo-store.commercelayer.app/identity`,
+        identity: `https://demo-store.commercelayer.app/identity/login?clientId=client123&scope=scope123&publicScope=public_scope123&returnUrl=https://example.com/return&resetPasswordUrl=https://example.com/reset-password`,
         microstore: `https://demo-store.commercelayer.app/microstore/list/skuList123?accessToken=${ioAccessToken}`,
         my_account: `https://demo-store.commercelayer.app/my-account?accessToken=${ioAccessToken}`,
       },
@@ -339,6 +364,9 @@ describe("getMfeConfig function", () => {
         accessToken: ioAccessToken,
         orderId: "order123",
         skuId: "sku123",
+        identityType: "signup",
+        clientId: "client123",
+        scope: "scope123",
       },
       market: "market:id:ZKcv13rT",
     })
@@ -346,7 +374,7 @@ describe("getMfeConfig function", () => {
       links: {
         cart: `https://demo-store.commercelayer.app/cart/order123?accessToken=${ioAccessToken}`,
         checkout: `https://demo-store.commercelayer.app/checkout/order123?accessToken=${ioAccessToken}`,
-        identity: `https://demo-store.commercelayer.app/identity`,
+        identity: `https://demo-store.commercelayer.app/identity/signup?clientId=client123&scope=scope123`,
         microstore: `https://demo-store.commercelayer.app/microstore/sku/sku123?accessToken=${ioAccessToken}`,
         my_account: `https://demo-store.commercelayer.app/my-account?accessToken=${ioAccessToken}`,
       },
@@ -367,7 +395,8 @@ describe("getMfeConfig function", () => {
           "market:id:ZKcv13rT": {
             links: {
               cart: "https://market-cart.example.com/:order_id?accessToken=:access_token",
-              identity: "https://custom-identity.example.com",
+              identity:
+                "https://custom-identity.example.com/:identity_type?scope=:scope&clientId=:client_id",
             },
           },
         },
@@ -376,6 +405,9 @@ describe("getMfeConfig function", () => {
         accessToken: ioAccessToken,
         orderId: "order123",
         skuListId: "skuList123",
+        identityType: "signup",
+        clientId: "client123",
+        scope: "scope123",
       },
       market: "market:id:ZKcv13rT",
     })
@@ -383,7 +415,7 @@ describe("getMfeConfig function", () => {
       links: {
         cart: `https://market-cart.example.com/order123?accessToken=${ioAccessToken}`,
         checkout: `https://custom-checkout.example.com/order123?accessToken=${ioAccessToken}`,
-        identity: `https://custom-identity.example.com`,
+        identity: `https://custom-identity.example.com/signup?scope=scope123&clientId=client123`,
         microstore: `https://demo-store.commercelayer.app/microstore/list/skuList123?accessToken=${ioAccessToken}`,
         my_account: `https://demo-store.commercelayer.app/my-account?accessToken=${ioAccessToken}`,
       },

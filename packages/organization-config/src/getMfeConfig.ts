@@ -41,6 +41,30 @@ interface ConfigParams {
    * Unique identifier for an SKU used to replace the `:sku_id` placeholder in URLs.
    */
   skuId?: NullableType<string>
+  /**
+   * Type used for the identity, which can be used to replace a `:identity_type` placeholder in URLs.
+   */
+  identityType?: NullableType<"login" | "signup">
+  /**
+   * Client ID used for authentication, which can be used to replace a `:client_id` placeholder in URLs.
+   */
+  clientId?: NullableType<string>
+  /**
+   * For the identity, it is the market used for the login process (e.g. a private market).
+   */
+  scope?: NullableType<string>
+  /**
+   * For the identity, it is the default scope used by the app to obtain the organization settings needed to customize the UI (name, logo, colors, etc.).
+   */
+  publicScope?: NullableType<string>
+  /**
+   * Return URL after certain actions, which can be used to replace a `:return_url` placeholder in URLs.
+   */
+  returnUrl?: NullableType<string>
+  /**
+   * URL to the reset password page, which can be used to replace a `:reset_password_url` placeholder in URLs.
+   */
+  resetPasswordUrl?: NullableType<string>
 }
 
 interface GetMfeConfigProps {
@@ -97,6 +121,15 @@ export function getMfeConfig({
       .replace(/:order_id/g, params?.orderId ?? ":order_id")
       .replace(/:sku_list_id/g, params?.skuListId ?? ":sku_list_id")
       .replace(/:sku_id/g, params?.skuId ?? ":sku_id")
+      .replace(/:identity_type/g, params?.identityType ?? ":identity_type")
+      .replace(/:client_id/g, params?.clientId ?? ":client_id")
+      .replace(/:scope/g, params?.scope ?? ":scope")
+      .replace(/:public_scope/g, params?.publicScope ?? ":public_scope")
+      .replace(/:return_url/g, params?.returnUrl ?? ":return_url")
+      .replace(
+        /:reset_password_url/g,
+        params?.resetPasswordUrl ?? ":reset_password_url",
+      )
 
     return JSON.parse(replacedConfig)
   }
@@ -142,7 +175,18 @@ function getDefaults({ params }: GetMfeConfigProps): DefaultMfeConfig {
         cart: `${appEndpoint}/cart/:order_id?accessToken=:access_token`,
         checkout: `${appEndpoint}/checkout/:order_id?accessToken=:access_token`,
         my_account: `${appEndpoint}/my-account?accessToken=:access_token`,
-        identity: `${appEndpoint}/identity`,
+        identity: `${appEndpoint}/identity/:identity_type?${[
+          "clientId=:client_id",
+          "scope=:scope",
+          params.publicScope != null ? "publicScope=:public_scope" : null,
+          params.lang != null ? "lang=:lang" : null,
+          params.returnUrl != null ? "returnUrl=:return_url" : null,
+          params.resetPasswordUrl != null
+            ? "resetPasswordUrl=:reset_password_url"
+            : null,
+        ]
+          .filter((part) => part != null)
+          .join("&")}`,
         microstore:
           params.skuListId != null
             ? `${appEndpoint}/microstore/list/:sku_list_id?accessToken=:access_token`
