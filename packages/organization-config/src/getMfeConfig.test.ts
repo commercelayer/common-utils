@@ -352,7 +352,7 @@ describe("getMfeConfig function", () => {
         checkout: `https://demo-store.commercelayer.app/checkout/order123?accessToken=${ioAccessToken}`,
         identity: `https://demo-store.commercelayer.app/identity/login?clientId=client123&scope=scope123&publicScope=public_scope123&returnUrl=https://example.com/return&resetPasswordUrl=https://example.com/reset-password`,
         microstore: `https://demo-store.commercelayer.app/microstore/list/skuList123?accessToken=${ioAccessToken}`,
-        my_account: `https://demo-store.commercelayer.app/my-account?accessToken=${ioAccessToken}`,
+        my_account: `https://demo-store.commercelayer.app/my-account?accessToken=${ioAccessToken}&returnUrl=https://example.com/return`,
       },
     })
   })
