@@ -174,7 +174,12 @@ function getDefaults({ params }: GetMfeConfigProps): DefaultMfeConfig {
       links: {
         cart: `${appEndpoint}/cart/:order_id?accessToken=:access_token`,
         checkout: `${appEndpoint}/checkout/:order_id?accessToken=:access_token`,
-        my_account: `${appEndpoint}/my-account?accessToken=:access_token`,
+        my_account: `${appEndpoint}/my-account?${[
+          "accessToken=:access_token",
+          params.returnUrl != null ? "returnUrl=:return_url" : null,
+        ]
+          .filter((part) => part != null)
+          .join("&")}`,
         identity: `${appEndpoint}/identity/:identity_type?${[
           "clientId=:client_id",
           "scope=:scope",
