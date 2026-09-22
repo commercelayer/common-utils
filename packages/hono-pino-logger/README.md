@@ -22,11 +22,15 @@ npm install @commercelayer/hono-pino-logger
 yarn add @commercelayer/hono-pino-logger
 ```
 
+### Requirements
+
+- Node.js `>=20`
+
 ### Peer Dependencies
 
 This package requires:
 - `hono` (^4.0.0)
-- `@hono/node-server` (^1.0.0)
+- `@hono/node-server` (^1.0.0 || ^2.0.0)
 
 For development pretty printing, install:
 ```bash
@@ -249,17 +253,21 @@ app.use(honoHttpLogger())
   "msg": "method=GET path=/api/users status=200 duration=45ms",
   "request_id": "abc-123",
   "user_agent": "Mozilla/5.0...",
+  "host": "api.example.com",
   "ip": "192.168.1.1",
-  "http": {
-    "request": {
-      "method": "GET",
-      "url": "/api/users"
-    },
-    "response": {
-      "statusCode": 200
-    },
-    "responseTime": 45
-  }
+  "protocol": "https",
+  "http.request": {
+    "method": "GET",
+    "url": "/api/users",
+    "query": "",
+    "remote_address": "192.168.1.1",
+    "remote_port": 54153
+  },
+  "http.response": {
+    "statusCode": 200,
+    "headers": {}
+  },
+  "http.responseTime": 45
 }
 ```
 

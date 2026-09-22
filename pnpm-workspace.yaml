@@ -1,2 +1,10 @@
 packages:
   - 'packages/*'
+allowBuilds:
+  esbuild: true
+  nx: true
+overrides:
+  esbuild: 0.28.2
+peerDependencyRules:
+  allowedVersions:
+    esbuild: 0.28.2
