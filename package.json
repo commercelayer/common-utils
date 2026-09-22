@@ -12,7 +12,8 @@
     "dep:semver": "pnpm dlx npm-check-updates --packageFile '**/package.json' -u -t semver",
     "clean": "pnpm dlx rimraf --glob **/node_modules **/pnpm-lock.yaml",
     "lerna": "pnpm dlx lerna@10.0.1",
-    "version": "node update-jsr-version.js && git add ."
+    "version": "node update-jsr-version.js && git add .",
+    "ls-engines": "pnpm dlx ls-engines"
   },
   "keywords": [],
   "author": {
