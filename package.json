@@ -8,10 +8,9 @@
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
     "test": "pnpm -r test",
-    "dep:upgrade:major": "pnpm -r exec npm-check-updates -u",
-    "dep:upgrade:minor": "pnpm dep:upgrade:major -t minor",
-    "dep:self-upgrade:major": "pnpm exec npm-check-updates -u",
-    "dep:self-upgrade:minor": "pnpm dep:self-upgrade:major -t minor",
+    "dep:major": "pnpm dlx npm-check-updates --packageFile '**/package.json' -u",
+    "dep:semver": "pnpm dlx npm-check-updates --packageFile '**/package.json' -u -t semver",
+    "clean": "pnpm dlx rimraf --glob **/node_modules **/pnpm-lock.yaml",
     "version": "node update-jsr-version.js && git add ."
   },
   "keywords": [],
@@ -32,8 +31,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^9.0.3",
-    "npm-check-updates": "^19.2.0",
+    "lerna": "^10.0.1",
     "replace-in-file": "^8.4.0"
   }
 }

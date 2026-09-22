@@ -1,2 +1,13 @@
 packages:
   - 'packages/*'
+allowBuilds:
+  esbuild: true
+  nx: true
+minimumReleaseAgeExclude:
+  - prettier@3.9.8
+  - type-fest@5.10.0
+overrides:
+  esbuild: 0.28.2
+peerDependencyRules:
+  allowedVersions:
+    esbuild: 0.28.2
