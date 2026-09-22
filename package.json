@@ -28,9 +28,6 @@
     "node": ">=16",
     "pnpm": ">=7"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "replace-in-file": "^8.4.0"
   }
